@@ -21,24 +21,26 @@
       password: z.string().default(""),
       emails: z.array(z.string().email()),
     })
-    .superRefine(({ mode, password, emails }, ctx) => {
-      if (mode === "policy" && emails.length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.too_small,
+    .check(({ issues, value }) => {
+      if (value.mode === "policy" && value.emails.length === 0) {
+        issues.push({
+          code: "too_small",
           minimum: 1,
           inclusive: true,
-          type: "array",
+          origin: "array",
           message: "At least one email address must be present",
           path: ["emails"],
+          input: value,
         });
-      } else if (mode === "password" && password.length === 0) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.too_small,
+      } else if (value.mode === "password" && value.password.length === 0) {
+        issues.push({
+          code: "too_small",
           minimum: 1,
           inclusive: true,
-          type: "string",
+          origin: "string",
           message: "Password must be present",
           path: ["password"],
+          input: value,
         });
       }
     })

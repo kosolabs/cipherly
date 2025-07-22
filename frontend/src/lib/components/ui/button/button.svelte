@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Button as ButtonPrimitive } from "bits-ui";
   import { cn } from "$lib/utils";
-  import { buttonVariants, type Props, type Events } from ".";
+  import { Button as ButtonPrimitive } from "bits-ui";
+  import { buttonVariants, type Events, type Props } from ".";
 
   type $$Props = Props;
   type $$Events = Events;
@@ -11,11 +11,14 @@
   export let size: $$Props["size"] = "default";
   export let builders: $$Props["builders"] = [];
   export { className as class };
+
+  // @ts-ignore
+  $: className2 = cn(buttonVariants({ variant, size, className }));
 </script>
 
 <ButtonPrimitive.Root
   {builders}
-  class={cn(buttonVariants({ variant, size, className }))}
+  class={cn(className2)}
   type="button"
   {...$$restProps}
   on:click
