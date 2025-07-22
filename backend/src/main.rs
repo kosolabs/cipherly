@@ -79,7 +79,8 @@ fn cipherly(json_keks: &str, certs: Certs) -> Rocket<Build> {
 
 #[launch]
 fn rocket() -> Rocket<Build> {
-    env::set_var("ROCKET_PORT", env::var("PORT").unwrap_or("8000".into()));
+    // TODO: Audit that the environment access only happens in single-threaded code.
+    unsafe { env::set_var("ROCKET_PORT", env::var("PORT").unwrap_or("8000".into())) };
     let kek = env::var("KEKS").expect("KEKS environment variable is not set");
     let certs = google::fetch().expect("Failed to fetch Google certs");
     cipherly(&kek, certs)
