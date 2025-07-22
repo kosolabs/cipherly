@@ -1,11 +1,11 @@
 use aes_gcm::{
-    aead::{Aead, OsRng},
     AeadCore, Aes256Gcm,
+    aead::{Aead, OsRng},
 };
 use base64::prelude::*;
 use google::Certs;
 use rmp_serde::{from_slice, to_vec};
-use rocket::{fs::FileServer, launch, post, routes, Build, Rocket, State};
+use rocket::{Build, Rocket, State, fs::FileServer, launch, post, routes};
 use rocket::{http::Status, serde::json::Json};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env};
@@ -89,8 +89,8 @@ fn rocket() -> Rocket<Build> {
 #[cfg(test)]
 mod tests {
     use super::cipherly;
-    use crate::google::{parse, Claims};
-    use jsonwebtoken::{encode, EncodingKey};
+    use crate::google::{Claims, parse};
+    use jsonwebtoken::{EncodingKey, encode};
     use rocket::http::{Header, Status};
     use rocket::local::blocking::Client;
 

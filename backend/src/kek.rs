@@ -1,4 +1,4 @@
-use aes_gcm::{aead::KeyInit, Aes256Gcm, Key};
+use aes_gcm::{Aes256Gcm, Key, aead::KeyInit};
 use base64::prelude::*;
 use serde_json::Value;
 use std::collections::HashMap;

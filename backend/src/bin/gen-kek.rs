@@ -1,6 +1,6 @@
 use aes_gcm::{
-    aead::{KeyInit, OsRng},
     Aes256Gcm,
+    aead::{KeyInit, OsRng},
 };
 use base64::prelude::*;
 

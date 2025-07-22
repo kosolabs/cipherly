@@ -1,8 +1,8 @@
 use jsonwebtoken::DecodingKey;
 use jsonwebtoken::Validation;
-use rocket::request::FromRequest;
 use rocket::State;
-use rocket::{http::Status, request::Outcome, Request};
+use rocket::request::FromRequest;
+use rocket::{Request, http::Status, request::Outcome};
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 
