@@ -1,0 +1,10 @@
+# Default variables for developers running cargo run and cargo test.
+[env]
+RUST_BACKTRACE = "1"
+RUST_LOG = "cipherly=trace,tower_http=trace,axum=trace,info"
+
+[build]
+rustflags = [
+  "-C",
+  "force-unwind-tables",
+] # Needed for backtraces: https://github.com/rust-lang/rust/issues/94815
