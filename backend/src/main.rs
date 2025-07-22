@@ -1,11 +1,11 @@
 use aes_gcm::{
-    aead::{Aead, OsRng},
     AeadCore, Aes256Gcm,
+    aead::{Aead, OsRng},
 };
 use base64::prelude::*;
 use google::Certs;
 use rmp_serde::{from_slice, to_vec};
-use rocket::{fs::FileServer, launch, post, routes, Build, Rocket, State};
+use rocket::{Build, Rocket, State, fs::FileServer, launch, post, routes};
 use rocket::{http::Status, serde::json::Json};
 use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, env};
@@ -79,7 +79,8 @@ fn cipherly(json_keks: &str, certs: Certs) -> Rocket<Build> {
 
 #[launch]
 fn rocket() -> Rocket<Build> {
-    env::set_var("ROCKET_PORT", env::var("PORT").unwrap_or("8000".into()));
+    // TODO: Audit that the environment access only happens in single-threaded code.
+    unsafe { env::set_var("ROCKET_PORT", env::var("PORT").unwrap_or("8000".into())) };
     let kek = env::var("KEKS").expect("KEKS environment variable is not set");
     let certs = google::fetch().expect("Failed to fetch Google certs");
     cipherly(&kek, certs)
@@ -88,8 +89,8 @@ fn rocket() -> Rocket<Build> {
 #[cfg(test)]
 mod tests {
     use super::cipherly;
-    use crate::google::{parse, Claims};
-    use jsonwebtoken::{encode, EncodingKey};
+    use crate::google::{Claims, parse};
+    use jsonwebtoken::{EncodingKey, encode};
     use rocket::http::{Header, Status};
     use rocket::local::blocking::Client;
 
@@ -108,7 +109,7 @@ mod tests {
             exp: 2524636800,
         };
         let token = encode(&header, &claims, &encoding_key).unwrap();
-        Header::new("Authorization", format!("Bearer {}", token))
+        Header::new("Authorization", format!("Bearer {token}"))
     }
 
     fn client() -> Client {

@@ -1,8 +1,19 @@
 [package]
 name = "cipherly"
 version = "0.1.0"
-edition = "2021"
-default-run = "cipherly"
+edition = "2024"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+# Target built docker to speed up dependency compilation.
+# See Dockerfile.
+[lib]
+name = "build_backend_dummy"
+path = "build/dummy.rs"
 
 [dependencies]
 aes-gcm = "0.10.3"
