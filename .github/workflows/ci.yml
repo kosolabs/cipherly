@@ -16,7 +16,7 @@ jobs:
       - name: Configure rust version
         id: rust-version
         run: |
-          VERSION=$(cat ../rust-toolchain.toml| sed -rn 's/^channel = "([0-9]+\.[0-9]+\.[0-9]+)"/\1/p')
+          VERSION=$(cat rust-toolchain.toml| sed -rn 's/^channel = "([0-9]+\.[0-9]+\.[0-9]+)"/\1/p')
           if [ -z "${VERSION}" ]; then
             echo "Version not found in rust-toolchain.toml"
             exit 1
