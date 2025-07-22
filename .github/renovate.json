@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", "group:all"],
+  "timezone": "America/Los_Angeles",
+  "schedule": ["before 7am on Monday"],
+  "pinDigests": true,
+  "customManagers": [
+    {
+      "description": "Update Rust stable version in rust-toolchain.toml",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)rust-toolchain\\.toml?$/"],
+      "matchStrings": [
+        "channel\\s*=\\s*\"(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)\""
+      ],
+      "depNameTemplate": "rust",
+      "packageNameTemplate": "rust-lang/rust",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)\\.npmrc$/"],
+      "matchStrings": ["use-node-version=(?<currentValue>.*?)\\n"],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version"
+    },
+    {
+      "description": "Update crate versions installed by Cargo in Dockerfiles",
+      "customType": "regex",
+      "managerFilePatterns": ["/(^|/)([^/]+\\.)?Dockerfile$/"],
+      "matchStrings": [
+        "cargo install\\s+(?<depName>\\S+)@(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "crate"
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["* 1-7 1 * *"],
+    "automerge": true,
+    "platformAutomerge": false,
+    "automergeSchedule": ["* 8-14 * * 1-5"]
+  }
+}
