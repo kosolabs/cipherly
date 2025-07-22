@@ -10,5 +10,45 @@
     {
       "path": "backend"
     }
-  ]
+  ],
+  "settings": {
+    "[github-actions-workflow]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[rust]": {
+      "editor.defaultFormatter": "rust-lang.rust-analyzer"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.validate": ["javascript", "javascriptreact", "svelte"],
+    "files.associations": {
+      "*.css": "tailwindcss"
+    },
+    "rust-analyzer.check.command": "clippy",
+    "search.exclude": {
+      "backend/static/": true
+    },
+    "svelte.enable-ts-plugin": true,
+    "tailwindCSS.classAttributes": [
+      "class",
+      "className",
+      "ngClass",
+      "class:list",
+      ".*Class",
+      ".*Classes"
+    ],
+    "tailwindCSS.experimental.classRegex": [
+      ["Classes.* \\=([^;]*);", "'([^']*)'"],
+      ["Classes.* \\=([^;]*);", "\"([^\"]*)\""],
+      ["Classes.* \\=([^;]*);", "\\`([^\\`]*)\\`"],
+      ["Variants.* \\=([^;]*);", "'([^']*)'"],
+      ["Variants.* \\=([^;]*);", "\"([^\"]*)\""],
+      ["Variants.* \\=([^;]*);", "\\`([^\\`]*)\\`"]
+    ]
+  }
 }
