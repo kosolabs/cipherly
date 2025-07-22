@@ -5,23 +5,23 @@ import {
 import { Base64 } from "js-base64";
 import { z } from "zod";
 
-function decodeBase64(data: string): Uint8Array {
-  return Base64.toUint8Array(data);
+function decodeBase64(data: string): Uint8Array<ArrayBuffer> {
+  return new Uint8Array(Base64.toUint8Array(data));
 }
 
 function encodeBase64(data: Uint8Array): string {
   return Base64.fromUint8Array(data, true);
 }
 
-export function encodeUtf8(data: string): Uint8Array {
-  return new TextEncoder().encode(data);
+export function encodeUtf8(data: string): Uint8Array<ArrayBuffer> {
+  return new Uint8Array(new TextEncoder().encode(data));
 }
 
 export function decodeUtf8(data: Uint8Array): string {
   return new TextDecoder().decode(data);
 }
 
-function generateSalt(): Uint8Array {
+function generateSalt(): Uint8Array<ArrayBuffer> {
   return crypto.getRandomValues(new Uint8Array(16));
 }
 
@@ -36,7 +36,7 @@ async function generateKey(): Promise<CryptoKey> {
   );
 }
 
-function generateIv(): Uint8Array {
+function generateIv(): Uint8Array<ArrayBuffer> {
   return crypto.getRandomValues(new Uint8Array(12));
 }
 
@@ -70,7 +70,7 @@ async function encrypt(
   data: Uint8Array,
   key: CryptoKey,
   iv: Uint8Array,
-): Promise<Uint8Array> {
+): Promise<Uint8Array<ArrayBuffer>> {
   return new Uint8Array(
     await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, data),
   );
@@ -114,13 +114,15 @@ export function isPasswordPayload(payload: any): payload is PasswordPayload {
 function encodePasswordPayload(
   payload: PasswordBody,
   filename?: string,
-): Uint8Array {
+): Uint8Array<ArrayBuffer> {
   const msgPackPayload: PasswordPayload = {
     es: EncryptionScheme.Password,
     fn: filename,
     ...payload,
   };
-  return encodeMessagePack(msgPackPayload, { ignoreUndefined: true });
+  return new Uint8Array(
+    encodeMessagePack(msgPackPayload, { ignoreUndefined: true }),
+  );
 }
 
 function decodePasswordPayload(data: Uint8Array): PasswordPayload {
@@ -220,8 +222,8 @@ type Envelope = {
 
 type SealedEnvelope = {
   kid: string;
-  nonce: Uint8Array;
-  data: Uint8Array;
+  nonce: Uint8Array<ArrayBuffer>;
+  data: Uint8Array<ArrayBuffer>;
 };
 
 async function seal(envelope: Envelope): Promise<SealedEnvelope> {
