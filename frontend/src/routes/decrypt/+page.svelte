@@ -54,7 +54,7 @@
       if (isPasswordPayload(payload)) {
         if (!password) {
           ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+            code: "custom",
             message: "Password must be present",
             path: ["password"],
             fatal: true,
@@ -66,7 +66,7 @@
       if (isAuthPayload(payload)) {
         if (!token) {
           ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+            code: "custom",
             message: "User must be authorized",
             path: ["token"],
             fatal: true,
@@ -76,7 +76,7 @@
         return { payload, token };
       }
       ctx.addIssue({
-        code: z.ZodIssueCode.custom,
+        code: "custom",
         message: "Payload must be present",
         path: ["payload"],
         fatal: true,
