@@ -109,7 +109,7 @@ mod tests {
             exp: 2524636800,
         };
         let token = encode(&header, &claims, &encoding_key).unwrap();
-        Header::new("Authorization", format!("Bearer {}", token))
+        Header::new("Authorization", format!("Bearer {token}"))
     }
 
     fn client() -> Client {

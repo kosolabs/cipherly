@@ -28,7 +28,7 @@ mod tests {
     fn parse_succeeds() {
         let keks = parse(TEST_KEKS).unwrap();
         assert_eq!(keks.len(), 2);
-        assert!(keks.get("t1").is_some());
-        assert!(keks.get("t2").is_some());
+        assert!(keks.contains_key("t1"));
+        assert!(keks.contains_key("t2"));
     }
 }
