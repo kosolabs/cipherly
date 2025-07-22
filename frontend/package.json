@@ -10,6 +10,10 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "test": "vitest"
   },
+  "packageManager": "pnpm@10.13.1",
+  "engines": {
+    "node": ">= 20"
+  },
   "devDependencies": {
     "@sveltejs/adapter-static": "^3.0.1",
     "@sveltejs/kit": "^2.0.0",
@@ -43,5 +47,17 @@
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0",
     "zod": "^3.22.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "cookie": "1.0.2"
+    },
+    "onlyBuiltDependencies": [
+      "@tailwindcss/oxide",
+      "esbuild"
+    ],
+    "ignoredBuiltDependencies": [
+      "svelte-preprocess"
+    ]
   }
 }

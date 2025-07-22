@@ -12,11 +12,11 @@ FROM node AS frontend
 WORKDIR /app
 
 COPY frontend/*.json frontend/*.js frontend/*.cjs frontend/*.ts ./
-RUN npm install
+RUN pnpm install
 
 COPY frontend/src ./src
 COPY frontend/static ./static
-RUN npm run build
+RUN pnpm build
 
 FROM gcr.io/distroless/cc-debian12 AS runtime
 

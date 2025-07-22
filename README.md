@@ -60,9 +60,9 @@ gcloud run deploy cipherly \
 
    ```sh
    cd frontend
-   npm install
-   npm run build
-   npm run dev
+   pnpm install
+   pnpm build
+   pnpm dev
    ```
 
 1. Start a backend server using a test [KEK](https://cloud.google.com/kms/docs/envelope-encryption#key_encryption_keys)

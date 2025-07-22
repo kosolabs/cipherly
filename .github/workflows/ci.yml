@@ -4,7 +4,7 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - run: docker build -t gcr.io/cipherly/cipherly .
   cargo:
     runs-on: ubuntu-latest
@@ -12,7 +12,7 @@ jobs:
       run:
         working-directory: ./backend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
@@ -21,17 +21,22 @@ jobs:
       - run: cargo test
       - run: cargo clippy -- -D warnings
       - run: cargo fmt -- --check
-  npm:
+  pnpm:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./frontend
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda # v4.1.0
         with:
-          node-version: 21
-      - run: npm install
-      - run: npm run build
-      - run: npm run check
-      - run: npm run test
+          package_json_file: frontend/package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: frontend/.nvmrc
+          cache: "pnpm"
+          cache-dependency-path: frontend/pnpm-lock.yaml
+      - run: pnpm install
+      - run: pnpm build
+      - run: pnpm check
+      - run: pnpm test
