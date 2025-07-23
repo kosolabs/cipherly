@@ -96,14 +96,13 @@ pub(crate) async fn authenticate(
     validation.required_spec_claims.insert("aud".to_string());
     validation.set_issuer(&["https://accounts.google.com"]);
     validation.required_spec_claims.insert("iss".to_string());
-    let token = match jsonwebtoken::decode::<Claims>(bearer, &key, &validation) {
-        Ok(token) => token,
+    let claims = match jsonwebtoken::decode::<Claims>(bearer, &key, &validation) {
+        Ok(token) => token.claims,
         Err(err) => {
             tracing::debug!("Decoding bearer token failed: {err}");
             return StatusCode::UNAUTHORIZED.into_response();
         }
     };
-    let claims = token.claims;
 
     tracing::Span::current().record("email", &claims.email);
     assert!(request.extensions_mut().insert(claims).is_none());
