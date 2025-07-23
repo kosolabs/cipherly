@@ -18,19 +18,19 @@ importers:
         specifier: ^0.21.8
         version: 0.21.16(svelte@5.36.13)
       clsx:
-        specifier: ^2.1.0
+        specifier: 2.1.1
         version: 2.1.1
       filesize:
-        specifier: ^11.0.2
+        specifier: 11.0.2
         version: 11.0.2
       google-oauth-gsi:
-        specifier: ^4.0.1
+        specifier: 4.0.1
         version: 4.0.1
       js-base64:
-        specifier: ^3.7.7
+        specifier: 3.7.7
         version: 3.7.7
       jwt-decode:
-        specifier: ^4.0.0
+        specifier: 4.0.0
         version: 4.0.0
       lucide-svelte:
         specifier: ^0.399.0
