@@ -1,19 +1,21 @@
 use aes_gcm::{Aes256Gcm, Key, aead::KeyInit};
+use anyhow::{Context as _, Result};
 use base64::prelude::*;
 use serde_json::Value;
 use std::collections::HashMap;
-use std::error::Error;
 
-pub fn parse(json: &str) -> Result<HashMap<String, Aes256Gcm>, Box<dyn Error>> {
+pub type Keks = HashMap<String, Aes256Gcm>;
+
+pub fn parse(json: &str) -> Result<Keks> {
     serde_json::from_str::<HashMap<String, Value>>(json)?
         .into_iter()
         .map(|(key, value)| {
             let base64_kek = value
                 .as_str()
-                .ok_or("KEK should be a Base64 encoded string")?;
+                .context("KEK should be a Base64 encoded string")?;
             let bytes_kek = BASE64_URL_SAFE_NO_PAD.decode(base64_kek)?;
             let kek = Aes256Gcm::new(Key::<Aes256Gcm>::from_slice(&bytes_kek));
-            Ok::<(String, Aes256Gcm), Box<dyn Error>>((key, kek))
+            Ok((key, kek))
         })
         .collect()
 }
