@@ -280,8 +280,7 @@ mod tests {
             aud: "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com"
                 .to_string(),
         };
-        let token = encode(&header, &claims, &encoding_key).unwrap();
-        format!("Bearer {token}")
+        encode(&header, &claims, &encoding_key).unwrap()
     }
 
     #[test_log::test(tokio::test)]
@@ -310,7 +309,7 @@ mod tests {
         let resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("alice@email.com", "Alice"))
+            .bearer_auth(bearer("alice@email.com", "Alice"))
             .body(include_str!("testdata/alice.sealed"))
             .send()
             .await
@@ -329,7 +328,7 @@ mod tests {
         let resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("eve@email.com", "Eve"))
+            .bearer_auth(bearer("eve@email.com", "Eve"))
             .body(include_str!("testdata/alice.sealed"))
             .send()
             .await
@@ -375,7 +374,7 @@ mod tests {
         let unseal_resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("alice@email.com", "Alice"))
+            .bearer_auth(bearer("alice@email.com", "Alice"))
             .body(body)
             .send()
             .await
