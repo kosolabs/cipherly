@@ -43,7 +43,10 @@ gcloud run deploy cipherly \
 
 1. Install prerequisites.
 
-   - [Node.js](https://nodejs.org/)
+   - [pnpm](https://pnpm.io/installation)
+     ```sh
+     curl -fsSL https://get.pnpm.io/install.sh | sh -
+     ```
    - [Rust](https://www.rust-lang.org/)
      ```sh
      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -69,7 +72,7 @@ gcloud run deploy cipherly \
    First, install [cargo-watch](https://crates.io/crates/cargo-watch) then run:
 
    ```sh
-   cargo watch -x run
+   cargo watch -x run --bin cipherly
    ```
 
 ## Message Format
