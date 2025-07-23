@@ -91,7 +91,9 @@ pub(crate) async fn authenticate(
     validation.set_audience(&[
         "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com",
     ]);
+    validation.required_spec_claims.insert("aud".to_string());
     validation.set_issuer(&["https://accounts.google.com"]);
+    validation.required_spec_claims.insert("iss".to_string());
     let Ok(token) = jsonwebtoken::decode::<Claims>(bearer, &key, &validation) else {
         return StatusCode::UNAUTHORIZED.into_response();
     };
