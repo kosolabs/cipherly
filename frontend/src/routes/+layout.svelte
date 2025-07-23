@@ -3,7 +3,7 @@
   import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import PrimaryNav from "$lib/components/PrimaryNav.svelte";
-  import { Lock, Unlock } from "lucide-svelte";
+  import { Lock, Unlock } from "@lucide/svelte";
   import { ModeWatcher } from "mode-watcher";
   import "../app.pcss";
 </script>

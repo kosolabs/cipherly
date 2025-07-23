@@ -1,13 +1,14 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
+  import { Icon } from "@lucide/svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
   type $$Props = HTMLAttributes<HTMLDivElement> & {
-    icon: ConstructorOfATypedSvelteComponent;
+    icon: typeof Icon;
   };
   let className: $$Props["class"] = undefined;
 
-  export let icon: ConstructorOfATypedSvelteComponent;
+  export let icon: typeof Icon;
   export { className as class };
 </script>
 
