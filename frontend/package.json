@@ -42,11 +42,11 @@
     "google-oauth-gsi": "4.0.1",
     "js-base64": "3.7.7",
     "jwt-decode": "4.0.0",
-    "lucide-svelte": "^0.399.0",
+    "lucide-svelte": "0.525.0",
     "mode-watcher": "^0.3.0",
     "tailwind-merge": "^2.2.1",
     "tailwind-variants": "^0.2.0",
-    "zod": "^4.0.5"
+    "zod": "4.0.5"
   },
   "pnpm": {
     "overrides": {
