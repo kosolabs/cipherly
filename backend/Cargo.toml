@@ -18,8 +18,7 @@ path = "build/dummy.rs"
 [dependencies]
 aes-gcm = "0.10.3"
 anyhow = "1.0.98"
-async-trait = "0.1.88"
-axum = { version = "0.8.4", features = ["http2", "ws", "macros"] }
+axum = { version = "0.8.4", features = ["http2", "macros"] }
 base64 = "0.22.1"
 chrono = "0.4.41"
 jsonwebtoken = "9.3.1"
@@ -35,7 +34,6 @@ tower-http = { version = "0.6.6", features = [
     "trace",
     "timeout",
     "request-id",
-    "cors",
 ] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
