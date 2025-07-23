@@ -1,10 +1,15 @@
-use jsonwebtoken::DecodingKey;
-use jsonwebtoken::Validation;
-use rocket::State;
-use rocket::request::FromRequest;
-use rocket::{Request, http::Status, request::Outcome};
+use std::sync::Arc;
+
+use anyhow::{Result, anyhow};
+use axum::{
+    Extension,
+    extract::Request,
+    http::StatusCode,
+    middleware::Next,
+    response::{IntoResponse, Response},
+};
+use jsonwebtoken::{DecodingKey, Validation};
 use serde::{Deserialize, Serialize};
-use std::error::Error;
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Key {
@@ -22,91 +27,97 @@ pub struct Certs {
 }
 
 impl Certs {
-    pub fn get(&self, kid: &str) -> Result<DecodingKey, Box<dyn Error>> {
+    pub fn get(&self, kid: &str) -> Result<DecodingKey> {
         for key in &self.keys {
             if key.kid == *kid {
                 return Ok(DecodingKey::from_rsa_components(&key.n, &key.e)?);
             }
         }
-        Err("missing".into())
+        Err(anyhow!("missing"))
     }
 }
 
-pub fn parse(json: &str) -> Result<Certs, Box<dyn Error>> {
+pub fn parse(json: &str) -> Result<Certs> {
     let certs: Certs = serde_json::from_str(json)?;
     Ok(certs)
 }
 
-pub fn fetch() -> Result<Certs, Box<dyn Error>> {
-    let client = reqwest::blocking::Client::new();
+pub async fn fetch() -> Result<Certs> {
+    let client = reqwest::Client::new();
     let resp = client
         .get("https://www.googleapis.com/oauth2/v3/certs")
-        .send()?
-        .text()?;
+        .send()
+        .await?
+        .text()
+        .await?;
     let certs: Certs = parse(&resp)?;
     Ok(certs)
 }
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Claims {
     pub email: String,
     pub name: String,
     pub exp: usize,
 }
 
-#[rocket::async_trait]
-impl<'r> FromRequest<'r> for Claims {
-    type Error = ();
-
-    async fn from_request(request: &'r Request<'_>) -> Outcome<Self, Self::Error> {
-        let Outcome::Success(certs) = request.guard::<&State<Certs>>().await else {
-            return Outcome::Error((Status::InternalServerError, ()));
-        };
-        let Some(auth_header) = request.headers().get_one("Authorization") else {
-            return Outcome::Error((Status::Unauthorized, ()));
-        };
-        let parts: Vec<&str> = auth_header.split(' ').collect();
-        if parts.len() != 2 || parts[0] != "Bearer" {
-            return Outcome::Error((Status::Unauthorized, ()));
-        }
-        let bearer = parts[1];
-        let Ok(header) = jsonwebtoken::decode_header(bearer) else {
-            return Outcome::Error((Status::Unauthorized, ()));
-        };
-        let Some(kid) = header.kid else {
-            return Outcome::Error((Status::Unauthorized, ()));
-        };
-        let Ok(key) = certs.get(&kid) else {
-            return Outcome::Error((Status::Unauthorized, ()));
-        };
-        let mut validation = Validation::new(jsonwebtoken::Algorithm::RS256);
-        validation.set_audience(&[
-            "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com",
-        ]);
-        validation.set_issuer(&["https://accounts.google.com"]);
-        let Ok(token) = jsonwebtoken::decode::<Claims>(bearer, &key, &validation) else {
-            return Outcome::Error((Status::Unauthorized, ()));
-        };
-        Outcome::Success(Claims {
-            email: token.claims.email,
-            name: token.claims.name,
-            exp: token.claims.exp,
-        })
+#[tracing::instrument(skip(request, next), fields(email))]
+pub(crate) async fn authenticate(
+    Extension(certs): Extension<Arc<Certs>>,
+    mut request: Request,
+    next: Next,
+) -> Response {
+    let Some(auth_header) = request.headers().get("Authorization") else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let Ok(auth_header) = auth_header.to_str() else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let parts: Vec<&str> = auth_header.split(' ').collect();
+    if parts.len() != 2 || parts[0] != "Bearer" {
+        return StatusCode::UNAUTHORIZED.into_response();
     }
+    let bearer = parts[1];
+    let Ok(header) = jsonwebtoken::decode_header(bearer) else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let Some(kid) = header.kid else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let Ok(key) = certs.get(&kid) else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let mut validation = Validation::new(jsonwebtoken::Algorithm::RS256);
+    validation.set_audience(&[
+        "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com",
+    ]);
+    validation.set_issuer(&["https://accounts.google.com"]);
+    let Ok(token) = jsonwebtoken::decode::<Claims>(bearer, &key, &validation) else {
+        return StatusCode::UNAUTHORIZED.into_response();
+    };
+    let claims = Claims {
+        email: token.claims.email,
+        name: token.claims.name,
+        exp: token.claims.exp,
+    };
+
+    tracing::Span::current().record("email", &claims.email);
+    assert!(request.extensions_mut().insert(claims).is_none());
+
+    next.run(request).await
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::google::Certs;
-    use crate::google::{fetch, parse};
+    use crate::google::{Certs, fetch, parse};
 
     fn certs() -> Certs {
         parse(include_str!("testdata/certs.json")).unwrap()
     }
 
-    #[test]
-    fn fetch_succeeds() {
-        let result = fetch();
+    #[tokio::test]
+    async fn fetch_succeeds() {
+        let result = fetch().await;
         assert!(result.is_ok());
     }
 
