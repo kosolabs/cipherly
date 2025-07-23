@@ -38,7 +38,7 @@ jobs:
       - name: Rust build cache
         uses: Swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 # v2.8.0
         with:
-          workspaces: "./ -> target"
+          workspaces: "./backend/ -> target"
           shared-key: "backend-build"
       - name: Make static dir
         run: rm -f static && mkdir static

@@ -37,3 +37,7 @@ tower-http = { version = "0.6.6", features = [
 ] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+
+
+[dev-dependencies]
+test-log = { version = "0.2.17", features = ["trace", "color"] }

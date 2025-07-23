@@ -59,9 +59,11 @@ pub struct Claims {
     pub email: String,
     pub name: String,
     pub exp: usize,
+    pub iss: String,
+    pub aud: String,
 }
 
-#[tracing::instrument(skip(request, next), fields(email))]
+#[tracing::instrument(skip_all, fields(email))]
 pub(crate) async fn authenticate(
     Extension(certs): Extension<Arc<Certs>>,
     mut request: Request,
@@ -91,14 +93,15 @@ pub(crate) async fn authenticate(
     validation.set_audience(&[
         "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com",
     ]);
+    validation.required_spec_claims.insert("aud".to_string());
     validation.set_issuer(&["https://accounts.google.com"]);
-    let Ok(token) = jsonwebtoken::decode::<Claims>(bearer, &key, &validation) else {
-        return StatusCode::UNAUTHORIZED.into_response();
-    };
-    let claims = Claims {
-        email: token.claims.email,
-        name: token.claims.name,
-        exp: token.claims.exp,
+    validation.required_spec_claims.insert("iss".to_string());
+    let claims = match jsonwebtoken::decode::<Claims>(bearer, &key, &validation) {
+        Ok(token) => token.claims,
+        Err(err) => {
+            tracing::debug!("Decoding bearer token failed: {err}");
+            return StatusCode::UNAUTHORIZED.into_response();
+        }
     };
 
     tracing::Span::current().record("email", &claims.email);

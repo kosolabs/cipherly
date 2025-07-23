@@ -276,12 +276,14 @@ mod tests {
             email: email.into(),
             name: name.into(),
             exp: 2524636800,
+            iss: "https://accounts.google.com".to_string(),
+            aud: "981002175662-g8jr2n89bptsn8n9ds1fn5edfheojr7i.apps.googleusercontent.com"
+                .to_string(),
         };
-        let token = encode(&header, &claims, &encoding_key).unwrap();
-        format!("Bearer {token}")
+        encode(&header, &claims, &encoding_key).unwrap()
     }
 
-    #[tokio::test]
+    #[test_log::test(tokio::test)]
     async fn post_seal_succeeds() {
         let (server, addr) = start_server().await;
         let client = Client::default();
@@ -299,7 +301,7 @@ mod tests {
         server.shutdown_and_wait().await.unwrap();
     }
 
-    #[tokio::test]
+    #[test_log::test(tokio::test)]
     async fn post_unseal_alice_succeeds() {
         let (server, addr) = start_server().await;
         let client = Client::default();
@@ -307,7 +309,7 @@ mod tests {
         let resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("alice@email.com", "Alice"))
+            .bearer_auth(bearer("alice@email.com", "Alice"))
             .body(include_str!("testdata/alice.sealed"))
             .send()
             .await
@@ -317,7 +319,7 @@ mod tests {
         server.shutdown_and_wait().await.unwrap();
     }
 
-    #[tokio::test]
+    #[test_log::test(tokio::test)]
 
     async fn post_unseal_eve_fails() {
         let (server, addr) = start_server().await;
@@ -326,7 +328,7 @@ mod tests {
         let resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("eve@email.com", "Eve"))
+            .bearer_auth(bearer("eve@email.com", "Eve"))
             .body(include_str!("testdata/alice.sealed"))
             .send()
             .await
@@ -336,7 +338,7 @@ mod tests {
         server.shutdown_and_wait().await.unwrap();
     }
 
-    #[tokio::test]
+    #[test_log::test(tokio::test)]
     async fn post_unseal_no_auth_fails() {
         let (server, addr) = start_server().await;
         let client = Client::default();
@@ -353,7 +355,7 @@ mod tests {
         server.shutdown_and_wait().await.unwrap();
     }
 
-    #[tokio::test]
+    #[test_log::test(tokio::test)]
     async fn seal_and_unseal_succeeds() {
         let (server, addr) = start_server().await;
         let client = Client::default();
@@ -372,7 +374,7 @@ mod tests {
         let unseal_resp = client
             .post(format!("http://{addr}/api/unseal"))
             .header("Content-Type", "application/json")
-            .header("Authorization", bearer("alice@email.com", "Alice"))
+            .bearer_auth(bearer("alice@email.com", "Alice"))
             .body(body)
             .send()
             .await
