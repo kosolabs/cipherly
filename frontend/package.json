@@ -55,9 +55,6 @@
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide",
       "esbuild"
-    ],
-    "ignoredBuiltDependencies": [
-      "svelte-preprocess"
     ]
   }
 }
