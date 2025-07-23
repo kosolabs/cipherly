@@ -15,7 +15,7 @@
     "node": ">= 20"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^3.0.8",
+    "@sveltejs/adapter-static": "3.0.8",
     "@sveltejs/kit": "2.25.1",
     "@sveltejs/vite-plugin-svelte": "6.1.0",
     "@tailwindcss/forms": "0.5.10",
@@ -25,9 +25,9 @@
     "prettier": "3.6.2",
     "prettier-plugin-organize-imports": "4.2.0",
     "prettier-plugin-svelte": "3.4.0",
-    "svelte": "^5.36.13",
+    "svelte": "5.36.13",
     "svelte-check": "4.3.0",
-    "tailwindcss": "^3.3.6",
+    "tailwindcss": "3.4.17",
     "tslib": "2.8.1",
     "typescript": "5.8.3",
     "vite": "7.0.5",
@@ -36,16 +36,16 @@
   "type": "module",
   "dependencies": {
     "@msgpack/msgpack": "3.1.2",
-    "bits-ui": "^0.21.8",
+    "bits-ui": "0.21.16",
     "clsx": "2.1.1",
     "filesize": "11.0.2",
     "google-oauth-gsi": "4.0.1",
     "js-base64": "3.7.7",
     "jwt-decode": "4.0.0",
     "lucide-svelte": "0.525.0",
-    "mode-watcher": "^0.3.0",
-    "tailwind-merge": "^2.2.1",
-    "tailwind-variants": "^0.2.0",
+    "mode-watcher": "0.3.1",
+    "tailwind-merge": "2.6.0",
+    "tailwind-variants": "0.2.1",
     "zod": "4.0.5"
   },
   "pnpm": {
