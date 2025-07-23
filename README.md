@@ -69,7 +69,7 @@ gcloud run deploy cipherly \
    First, install [cargo-watch](https://crates.io/crates/cargo-watch) then run:
 
    ```sh
-   KEKS='{"v1":"jRg36ErQ6FLcc7nZgngOpjJnJLGwA3xaMy0yx1pxJrI"}' cargo watch -x run
+   cargo watch -x run
    ```
 
 ## Message Format

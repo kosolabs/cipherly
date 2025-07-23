@@ -38,6 +38,8 @@ COPY --from=backend /app/target/release/cipherly ./
 COPY --from=frontend /app/build ./static
 
 ENV PORT=8000
-ENV ROCKET_ADDRESS=0.0.0.0
+ENV RUST_BACKTRACE=1
+ENV RUST_LIB_BACKTRACE=0
+ENV RUST_LOG=cipherly=debug,tower_http=trace,axum=trace,info
 
 CMD ["./cipherly"]
