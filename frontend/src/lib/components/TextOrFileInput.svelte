@@ -1,7 +1,7 @@
 <script lang="ts">
   import { encodeUtf8 } from "$lib/cipherly";
+  import { FileText, HardDriveUpload, XCircle } from "@lucide/svelte";
   import { filesize } from "filesize";
-  import { FileText, HardDriveUpload, XCircle } from "lucide-svelte";
   import { z } from "zod";
   import Button from "./ui/button/button.svelte";
 

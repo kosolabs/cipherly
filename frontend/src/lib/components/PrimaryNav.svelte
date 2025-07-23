@@ -1,12 +1,13 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import { cn } from "$lib/utils";
+  import type { Icon } from "@lucide/svelte";
 
   export let items: {
     href: string;
     title: string;
     disabled?: boolean;
-    icon: ConstructorOfATypedSvelteComponent;
+    icon: typeof Icon;
   }[];
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Info, X } from "lucide-svelte";
+  import { Info, X } from "@lucide/svelte";
   import IconText from "./IconText.svelte";
   import Input from "./Input.svelte";
   import { Badge } from "./ui/badge";

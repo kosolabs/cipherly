@@ -10,7 +10,7 @@
   import { Button } from "$lib/components/ui/button";
   import { Card } from "$lib/components/ui/card";
   import * as Tabs from "$lib/components/ui/tabs";
-  import { KeyRound, User } from "lucide-svelte";
+  import { KeyRound, User } from "@lucide/svelte";
   import { z } from "zod";
 
   const EncryptData = z

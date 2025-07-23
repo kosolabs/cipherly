@@ -10,6 +10,9 @@ overrides:
 importers:
   .:
     dependencies:
+      "@lucide/svelte":
+        specifier: 0.525.0
+        version: 0.525.0(svelte@5.36.13)
       "@msgpack/msgpack":
         specifier: 3.1.2
         version: 3.1.2
@@ -31,9 +34,6 @@ importers:
       jwt-decode:
         specifier: 4.0.0
         version: 4.0.0
-      lucide-svelte:
-        specifier: 0.525.0
-        version: 0.525.0(svelte@5.36.13)
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.36.13)
@@ -403,6 +403,14 @@ packages:
       {
         integrity: sha512-uw6guiW/gcAGPDhLmd77/6lW8QLeiV5RUTsAX46Db6oLhGaVj4lhnPwb184s1bkc8kdVg/+h988dro8GRDpmYQ==,
       }
+
+  "@lucide/svelte@0.525.0":
+    resolution:
+      {
+        integrity: sha512-dyUxkXzepagLUzL8jHQNdeH286nC66ClLACsg+Neu/bjkRJWPWMzkT+H0DKlE70QdkicGCfs1ZGmXCc351hmZA==,
+      }
+    peerDependencies:
+      svelte: ^5
 
   "@melt-ui/svelte@0.76.2":
     resolution:
@@ -1330,14 +1338,6 @@ packages:
       {
         integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==,
       }
-
-  lucide-svelte@0.525.0:
-    resolution:
-      {
-        integrity: sha512-kfuN6JcCqTfCz2B76aXnyGLAzEBRSYw5GaUspM5RNHQZS5aI5yaKu06fbaofOk8cDvUtY0AUm/zAix7aUX6Q3A==,
-      }
-    peerDependencies:
-      svelte: ^3 || ^4 || ^5.0.0-next.42
 
   magic-string@0.30.17:
     resolution:
@@ -2273,6 +2273,10 @@ snapshots:
       "@jridgewell/resolve-uri": 3.1.2
       "@jridgewell/sourcemap-codec": 1.5.4
 
+  "@lucide/svelte@0.525.0(svelte@5.36.13)":
+    dependencies:
+      svelte: 5.36.13
+
   "@melt-ui/svelte@0.76.2(svelte@5.36.13)":
     dependencies:
       "@floating-ui/core": 1.7.2
@@ -2767,10 +2771,6 @@ snapshots:
   loupe@3.1.4: {}
 
   lru-cache@10.4.3: {}
-
-  lucide-svelte@0.525.0(svelte@5.36.13):
-    dependencies:
-      svelte: 5.36.13
 
   magic-string@0.30.17:
     dependencies:

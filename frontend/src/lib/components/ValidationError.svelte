@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { AlertCircle } from "lucide-svelte";
+  import { AlertCircle } from "@lucide/svelte";
   import type { ZodError } from "zod";
   import IconText from "./IconText.svelte";
 
