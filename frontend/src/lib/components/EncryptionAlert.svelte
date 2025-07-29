@@ -2,7 +2,7 @@
   import * as Alert from "$lib/components/ui/alert";
 
   export let title: string;
-  export let error: any;
+  export let error: { status?: number; name: string; message?: string };
 </script>
 
 <Alert.Root variant="destructive" class="space-y-2 rounded">

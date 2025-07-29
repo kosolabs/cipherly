@@ -16,7 +16,7 @@
     class="-mb-px flex justify-center space-x-2 md:space-x-8"
     aria-label="Tabs"
   >
-    {#each items as item}
+    {#each items as item (item)}
       {#if item.href}
         <a
           class={cn(

@@ -107,7 +107,9 @@ type PasswordBody = z.infer<typeof PasswordBody>;
 export const PasswordPayload = PayloadHeader.merge(PasswordBody);
 export type PasswordPayload = z.infer<typeof PasswordPayload>;
 
-export function isPasswordPayload(payload: any): payload is PasswordPayload {
+export function isPasswordPayload(
+  payload: unknown,
+): payload is PasswordPayload {
   return PasswordPayload.safeParse(payload).success;
 }
 
@@ -164,7 +166,7 @@ type AuthBody = z.infer<typeof AuthBody>;
 export const AuthPayload = PayloadHeader.merge(AuthBody);
 export type AuthPayload = z.infer<typeof AuthPayload>;
 
-export function isAuthPayload(payload: any): payload is AuthPayload {
+export function isAuthPayload(payload: unknown): payload is AuthPayload {
   const parsed = AuthPayload.safeParse(payload);
   console.log(parsed.error);
   return AuthPayload.safeParse(payload).success;

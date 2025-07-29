@@ -28,7 +28,7 @@
       ]}
     />
     <main
-      class="bg-background p-4 lg:p-10 flex w-full flex-1 flex-col overflow-hidden"
+      class="flex w-full flex-1 flex-col overflow-hidden bg-background p-4 lg:p-10"
     >
       <slot />
     </main>

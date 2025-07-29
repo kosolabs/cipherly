@@ -65,5 +65,6 @@ jobs:
           cache-dependency-path: frontend/pnpm-lock.yaml
       - run: pnpm install
       - run: pnpm build
+      - run: pnpm lint
       - run: pnpm check
       - run: pnpm test

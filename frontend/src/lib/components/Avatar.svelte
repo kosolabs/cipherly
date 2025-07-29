@@ -14,7 +14,7 @@
 
 <div class={cn("overflow-clip rounded-full", className)}>
   <img
-    class={`object-fit rounded-full`}
+    class="object-fit rounded-full"
     src={user.picture}
     alt={user.email}
     referrerpolicy="no-referrer"

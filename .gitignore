@@ -1,1 +1,6 @@
 .venv
+.DS_Store
+.idea
+.secrets
+.env
+target

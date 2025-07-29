@@ -14,5 +14,11 @@ export default defineConfig({
   },
   test: {
     include: ["src/**/*.{test,spec}.{js,ts}"],
+    environment: "jsdom",
   },
+  resolve: process.env.VITEST
+    ? {
+        conditions: ["browser"],
+      }
+    : undefined,
 });

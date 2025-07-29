@@ -13,6 +13,6 @@
 </script>
 
 <div class={cn("flex items-center", className)}>
-  <svelte:component this={icon} class="inline-block h-[14px] w-[14px] mr-1" />
+  <svelte:component this={icon} class="mr-1 inline-block h-[14px] w-[14px]" />
   <slot />
 </div>

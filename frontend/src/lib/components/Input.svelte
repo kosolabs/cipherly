@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { Input, type InputEvents } from "$lib/components/ui/input";
+  import { Input } from "$lib/components/ui/input";
   import { cn } from "$lib/utils";
   import type { HTMLInputAttributes } from "svelte/elements";
 
   type $$Props = HTMLInputAttributes;
-  type $$Events = InputEvents;
 
   let className: $$Props["class"] = undefined;
   export let value: $$Props["value"] = undefined;

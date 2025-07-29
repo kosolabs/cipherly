@@ -1,6 +1,6 @@
+import formsPlugin from "@tailwindcss/forms";
+import * as colors from "tailwindcss/colors";
 import { fontFamily } from "tailwindcss/defaultTheme";
-
-const colors = require("tailwindcss/colors");
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -63,7 +63,7 @@ const config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [formsPlugin],
 };
 
 export default config;
