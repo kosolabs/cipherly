@@ -1,10 +1,9 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
   import { Button as ButtonPrimitive } from "bits-ui";
-  import { buttonVariants, type Events, type Props } from ".";
+  import { buttonVariants, type Props } from ".";
 
   type $$Props = Props;
-  type $$Events = Events;
 
   let className: $$Props["class"] = undefined;
   export let variant: $$Props["variant"] = "default";
@@ -12,7 +11,7 @@
   export let builders: $$Props["builders"] = [];
   export { className as class };
 
-  // @ts-ignore
+  // @ts-expect-error existing
   $: className2 = cn(buttonVariants({ variant, size, className }));
 </script>
 

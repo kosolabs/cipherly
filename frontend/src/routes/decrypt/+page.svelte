@@ -26,7 +26,7 @@
       if (data.length !== 0 || filename !== null) {
         try {
           return decodePayload(data, !!filename);
-        } catch (error) {
+        } catch (_error) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "Invalid Cipherly payload",
@@ -95,6 +95,7 @@
   let plaintext: Promise<Uint8Array[]> | null = null;
 
   $: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     inputData;
     plaintext = null;
     InputData.safeParseAsync(inputData).then((p) => {

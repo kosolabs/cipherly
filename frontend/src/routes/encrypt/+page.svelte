@@ -62,6 +62,7 @@
   let payload: Promise<Uint8Array> | null = null;
 
   $: {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     encrypt;
     payload = null;
     error = null;
@@ -109,7 +110,7 @@
     <div>
       <Label for="mode">Encryption Type</Label>
       <Tabs.Root id="mode" bind:value={encrypt.mode}>
-        <Tabs.List class="grid w-full grid-cols-2 h-auto">
+        <Tabs.List class="grid h-auto w-full grid-cols-2">
           <Tabs.Trigger value="policy">
             <IconText icon={User}>Policy</IconText>
           </Tabs.Trigger>
@@ -117,7 +118,7 @@
             <IconText icon={KeyRound}>Password</IconText>
           </Tabs.Trigger>
         </Tabs.List>
-        <Card class="px-4 pb-4 mt-2">
+        <Card class="mt-2 px-4 pb-4">
           <Tabs.Content value="policy">
             <Label for="emails">Authorized Emails</Label>
             <ValidationError {error} path="emails" />

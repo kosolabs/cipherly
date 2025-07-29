@@ -27,7 +27,7 @@
   }
 </script>
 
-<IconText class="text-xs text-blue-500 mb-1" icon={Info}>
+<IconText class="mb-1 text-xs text-blue-500" icon={Info}>
   Press Enter after each entry
 </IconText>
 
@@ -47,7 +47,7 @@
 
 {#if values.length > 0}
   <div class="flex flex-wrap pt-2">
-    {#each values as value}
+    {#each values as value (value)}
       <Badge variant="secondary" class="space-x-1 text-sm">
         <span>{value}</span>
         <Button

@@ -23,12 +23,12 @@
   referrerpolicy="no-referrer"
 >
   <div
-    class="border-border overflow-hidden rounded border shadow-sm hover:shadow"
+    class="overflow-hidden rounded border border-border shadow-sm hover:shadow"
   >
     <img class="object-cover" src={thumbnail} alt="" srcset="" />
     <div class="flex items-center space-x-4 px-4">
       <img src={youTubeLogo} alt="YouTube" width="24px" />
-      <p class="text-sm py-2 font-medium leading-tight">
+      <p class="py-2 text-sm font-medium leading-tight">
         {videoTitle}
       </p>
     </div>

@@ -32,7 +32,7 @@
     filename = output.filename;
   }
 
-  function handleUpload(event: any) {
+  function handleUpload(_event: unknown) {
     document.getElementById("fileInput")?.click();
   }
 
@@ -48,7 +48,7 @@
 <input id="fileInput" type="file" bind:files hidden />
 {#if file}
   <div
-    class="border px-3 py-4 rounded-md flex bg-accent justify-between items-center"
+    class="flex items-center justify-between rounded-md border bg-accent px-3 py-4"
   >
     <div class="flex items-center space-x-3">
       <FileText class="w-5 text-slate-400" />
@@ -64,13 +64,13 @@
         file = null;
       }}
     >
-      <XCircle class="w-5 text-red-800 cursor-pointer" />
+      <XCircle class="w-5 cursor-pointer text-red-800" />
     </button>
   </div>
 {:else}
   <div class="space-y-2">
     <textarea
-      class="border-2 text-base text-foreground focus:ring-0 focus-visible:ring-0 rounded-md w-full flex min-h-[80px] border-input bg-background px-3 py-2 ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      class="flex min-h-[80px] w-full rounded-md border-2 border-input bg-background px-3 py-2 text-base text-foreground ring-offset-background placeholder:text-muted-foreground focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
       placeholder={`Enter the ${placeholder} or drag and drop a ${placeholder} file here`}
       bind:value={text}
       on:drop={(e) => drop(e)}
