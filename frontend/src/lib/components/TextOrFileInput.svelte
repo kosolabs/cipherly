@@ -36,6 +36,13 @@
     document.getElementById("fileInput")?.click();
   }
 
+  function clearUpload() {
+    (document.getElementById("fileInput") as HTMLInputElement).value = "";
+    file = null;
+    data = new Uint8Array();
+    filename = null;
+  }
+
   function drop(event: DragEvent) {
     event.preventDefault();
     files = event.dataTransfer?.files ?? null;
@@ -45,7 +52,7 @@
   $: parse(text, file);
 </script>
 
-<input id="fileInput" type="file" bind:files hidden />
+<input id="fileInput" type="file" multiple={false} bind:files hidden />
 {#if file}
   <div
     class="flex items-center justify-between rounded-md border bg-accent px-3 py-4"
@@ -59,11 +66,7 @@
         </div>
       </div>
     </div>
-    <button
-      on:click={() => {
-        file = null;
-      }}
-    >
+    <button on:click={clearUpload}>
       <XCircle class="w-5 cursor-pointer text-red-800" />
     </button>
   </div>
