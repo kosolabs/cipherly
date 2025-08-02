@@ -67,4 +67,6 @@ jobs:
       - run: pnpm build
       - run: pnpm lint
       - run: pnpm check
-      - run: pnpm test
+      - run: pnpm test:unit
+      - run: pnpm exec playwright install --with-deps
+      - run: pnpm test:e2e
