@@ -2,8 +2,8 @@
   import { encodeUtf8 } from "$lib/cipherly";
   import { FileText, HardDriveUpload, XCircle } from "@lucide/svelte";
   import { filesize } from "filesize";
+  import { Button } from "kosui";
   import { z } from "zod";
-  import Button from "./ui/button/button.svelte";
 
   const schema = z
     .object({
@@ -66,9 +66,7 @@
         </div>
       </div>
     </div>
-    <button on:click={clearUpload}>
-      <XCircle class="w-5 cursor-pointer text-red-800" />
-    </button>
+    <Button variant="plain" icon={XCircle} onclick={clearUpload} />
   </div>
 {:else}
   <div class="space-y-2">
@@ -80,11 +78,8 @@
     ></textarea>
 
     {#if !text}
-      <Button variant="outline" on:click={(e) => handleUpload(e)}>
-        <div class="flex items-center space-x-3">
-          <HardDriveUpload class="w-5" />
-          <span>Upload {placeholder} file</span>
-        </div>
+      <Button icon={HardDriveUpload} onclick={(e) => handleUpload(e)}>
+        Upload {placeholder} file
       </Button>
     {/if}
   </div>

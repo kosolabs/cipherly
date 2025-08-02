@@ -1,18 +1,22 @@
 <script lang="ts">
-  import Banner from "$lib/components/Banner.svelte";
-  import DarkModeToggle from "$lib/components/DarkModeToggle.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import PrimaryNav from "$lib/components/PrimaryNav.svelte";
+  import { AppBar } from "$lib/components/ui/app-bar";
   import { Lock, Unlock } from "@lucide/svelte";
   import { ModeWatcher } from "mode-watcher";
+  import type { Snippet } from "svelte";
   import "../app.css";
+
+  type Props = {
+    children: Snippet;
+  };
+  let { children }: Props = $props();
 </script>
 
 <ModeWatcher />
 <div class="min-h-full">
-  <DarkModeToggle />
-  <section class="text-foregound bg-background pt-16">
-    <Banner />
+  <AppBar />
+  <section class="text-m3-foregound bg-m3-background pt-16">
     <PrimaryNav
       items={[
         {
@@ -28,9 +32,9 @@
       ]}
     />
     <main
-      class="bg-background flex w-full flex-1 flex-col overflow-hidden p-4 lg:p-10"
+      class="bg-m3-background flex w-full flex-1 flex-col overflow-hidden p-4 lg:p-10"
     >
-      <slot />
+      {@render children()}
     </main>
   </section>
   <Footer />

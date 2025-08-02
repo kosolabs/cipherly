@@ -6,11 +6,11 @@
   import Label from "$lib/components/Label.svelte";
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
-  import ValidationError from "$lib/components/ValidationError.svelte";
-  import { Button } from "$lib/components/ui/button";
   import { Card } from "$lib/components/ui/card";
   import * as Tabs from "$lib/components/ui/tabs";
+  import ValidationError from "$lib/components/ValidationError.svelte";
   import { KeyRound, User } from "@lucide/svelte";
+  import { Button } from "kosui";
   import { z } from "zod";
 
   const EncryptData = z
@@ -142,7 +142,11 @@
       </Tabs.Root>
     </div>
 
-    <Button class="min-w-[140px] text-lg font-bold" type="submit">
+    <Button
+      variant="filled"
+      class="min-w-[140px] text-lg font-bold"
+      type="submit"
+    >
       Encrypt
     </Button>
   </form>

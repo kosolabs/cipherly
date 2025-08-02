@@ -42,7 +42,7 @@
     </p>
     <div class="flex flex-wrap">
       {#each youTubeVideos as video (video)}
-        <YouTubeVideoCard {video} />
+        <YouTubeVideoCard {...video} />
       {/each}
     </div>
   </div>

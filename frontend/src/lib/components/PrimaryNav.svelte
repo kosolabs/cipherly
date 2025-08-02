@@ -6,12 +6,11 @@
   export let items: {
     href: string;
     title: string;
-    disabled?: boolean;
     icon: typeof Icon;
   }[];
 </script>
 
-<div class="border-accent border-b-4">
+<div class="border-m3-secondary/20 border-b-4">
   <nav
     class="-mb-px flex justify-center space-x-2 md:space-x-8"
     aria-label="Tabs"
@@ -23,11 +22,10 @@
             "-mb-[3px] flex items-center border-b-4 border-transparent px-1 py-2 text-base font-semibold whitespace-nowrap md:text-lg",
             $page.url.pathname !== "/" &&
               item.href.startsWith($page.url.pathname)
-              ? "border-primary text-primary border-b-4"
-              : "border-accent text-muted-foreground hover:border-muted-foreground hover:text-foreground",
-            item.disabled && "cursor-not-allowed opacity-80",
+              ? "border-m3-primary text-m3-primary border-b-4"
+              : "text-m3-secondary/80 hover:border-m3-secondary hover:text-m3-secondary",
           )}
-          href={item.disabled ? "/" : item.href}
+          href={item.href}
         >
           {#if item.icon}
             <svelte:component this={item.icon} class="mr-2 h-4 w-4" />

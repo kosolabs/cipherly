@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { Info, X } from "@lucide/svelte";
+  import { Info } from "@lucide/svelte";
+  import { Chip } from "kosui";
   import IconText from "./IconText.svelte";
   import Input from "./Input.svelte";
-  import { Badge } from "./ui/badge";
-  import { Button } from "./ui/button";
 
   export let values: string[] = [];
   export let placeholder = "";
@@ -46,18 +45,15 @@
 />
 
 {#if values.length > 0}
-  <div class="flex flex-wrap pt-2">
+  <div class="flex flex-wrap gap-1 pt-2">
     {#each values as value (value)}
-      <Badge variant="secondary" class="space-x-1 text-sm">
-        <span>{value}</span>
-        <Button
-          class="m-0 h-4 w-4 p-0 "
-          variant="ghost"
-          on:click={() => remove(value)}
-        >
-          <X class="cursor-pointer text-gray-400 hover:text-gray-500" />
-        </Button>
-      </Badge>
+      <Chip
+        class="px-3 py-1 text-sm"
+        shape="circle"
+        variant="tonal"
+        color="secondary"
+        onDelete={() => remove(value)}>{value}</Chip
+      >
     {/each}
   </div>
 {/if}

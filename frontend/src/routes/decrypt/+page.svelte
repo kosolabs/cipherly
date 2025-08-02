@@ -13,7 +13,7 @@
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
   import ValidationError from "$lib/components/ValidationError.svelte";
-  import { Button } from "$lib/components/ui/button";
+  import { Button } from "kosui";
   import { z } from "zod";
   import Auth from "./auth.svelte";
 
@@ -162,7 +162,11 @@
       </div>
     {/if}
 
-    <Button class="min-w-[140px] text-lg font-bold" type="submit">
+    <Button
+      variant="filled"
+      class="min-w-[140px] text-lg font-bold"
+      type="submit"
+    >
       Decrypt
     </Button>
   </form>

@@ -2,7 +2,6 @@
   import { decodeUtf8 } from "$lib/cipherly";
   import CopyText from "./CopyText.svelte";
   import EncryptionAlert from "./EncryptionAlert.svelte";
-  import Textarea from "./Textarea.svelte";
   import { Label } from "./ui/label";
   import { Skeleton } from "./ui/skeleton";
 
@@ -39,13 +38,13 @@
       >
         Ciphertext Payload
       </Label>
-      <Textarea
+      <textarea
         id="payload"
-        class="focus-visible:ring-none border-muted border-2 text-base focus-visible:outline-none disabled:cursor-text disabled:text-green-600 disabled:opacity-1"
+        class="border-m3-secondary/40 text-m3-primary w-full rounded-lg shadow"
         disabled
         value={text}
         placeholder="The plain text secret to encrypt"
-      />
+      ></textarea>
       <div class="space-x-2 pt-4">
         <CopyText label="Ciphertext" {text} />
       </div>
