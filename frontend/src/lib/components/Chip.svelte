@@ -32,7 +32,7 @@
 </IconText>
 
 <Input
-  class="border-2 border-muted text-base text-foreground focus:ring-0 focus-visible:ring-0"
+  class="border-muted text-foreground border-2 text-base focus:ring-0 focus-visible:ring-0"
   {placeholder}
   bind:value={input}
   on:blur={addAndClear}

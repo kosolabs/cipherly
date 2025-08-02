@@ -17,18 +17,18 @@
 </script>
 
 <a
-  class="mb-6 mr-6 w-full sm:w-auto sm:max-w-[16rem]"
+  class="mr-6 mb-6 w-full sm:w-auto sm:max-w-[16rem]"
   target="_blank"
   href={videoUrl}
   referrerpolicy="no-referrer"
 >
   <div
-    class="overflow-hidden rounded border border-border shadow-sm hover:shadow"
+    class="border-border overflow-hidden rounded border shadow-sm hover:shadow"
   >
     <img class="object-cover" src={thumbnail} alt="" srcset="" />
     <div class="flex items-center space-x-4 px-4">
       <img src={youTubeLogo} alt="YouTube" width="24px" />
-      <p class="py-2 text-sm font-medium leading-tight">
+      <p class="py-2 text-sm leading-tight font-medium">
         {videoTitle}
       </p>
     </div>

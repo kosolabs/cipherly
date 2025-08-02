@@ -63,7 +63,7 @@
 {#if user !== null && token !== null}
   <div class="flex items-center space-x-4">
     <div
-      class="flex items-center space-x-4 rounded-3xl bg-muted px-4 py-2 text-muted-foreground"
+      class="bg-muted text-muted-foreground flex items-center space-x-4 rounded-3xl px-4 py-2"
     >
       <img src={googleLogo} alt="Google" class="h-4 w-4" />
       <p>

@@ -3,7 +3,7 @@
 </script>
 
 <Label
-  class="text-background-foreground text-sm uppercase tracking-wider"
+  class="text-background-foreground text-sm tracking-wider uppercase"
   {...$$restProps}
 >
   <slot />
