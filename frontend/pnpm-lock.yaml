@@ -78,8 +78,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       kosui:
-        specifier: ^0.0.7
-        version: 0.0.7(svelte@5.37.1)
+        specifier: ^0.0.8
+        version: 0.0.8(svelte@5.37.1)
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.37.1)
@@ -1271,8 +1271,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  kosui@0.0.7:
-    resolution: {integrity: sha512-A9nR+E49Dyt2pbd3GfCsC/27sxKz6RMh5u+y3m/7ZQF4YCQf0IKcxNDwGi8wysMbeCKqzSslOfAisvL+DCTCWw==}
+  kosui@0.0.8:
+    resolution: {integrity: sha512-lzU9+2ABvGKxm+WzI519EVQIl3y249Tr7YRarV301kLlY/ErJ2EAccBOEQNYOgpzDx8FWRcse1IezpA+xjUPQA==}
     engines: {node: '>= 20'}
     peerDependencies:
       svelte: ^5.0.0
@@ -1371,6 +1371,11 @@ packages:
 
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
+
+  marked@16.1.1:
+    resolution: {integrity: sha512-ij/2lXfCRT71L6u0M29tJPhP0bM5shLL3u5BePhFwPELj2blMJ6GDtD7PfJhRLhJ/c2UwrK17ySVcDzy2YHjHQ==}
+    engines: {node: '>= 20'}
+    hasBin: true
 
   mdast-util-from-markdown@2.0.2:
     resolution: {integrity: sha512-uZhTV/8NBuw0WHkPTrCqDOl0zVe1BIng5ZtHoDk49ME1qqcjYmmLmOf0gELgcRMxN4w2iuIeVso5/6QymSrgmA==}
@@ -3173,8 +3178,9 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  kosui@0.0.7(svelte@5.37.1):
+  kosui@0.0.8(svelte@5.37.1):
     dependencies:
+      marked: 16.1.1
       svelte: 5.37.1
 
   levn@0.4.1:
@@ -3246,6 +3252,8 @@ snapshots:
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.4
+
+  marked@16.1.1: {}
 
   mdast-util-from-markdown@2.0.2:
     dependencies:

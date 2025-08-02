@@ -1,19 +1,18 @@
 <script lang="ts">
   import youTubeLogo from "$lib/assets/youtube.svg";
 
-  interface YouTubeVideo {
+  export type YouTubeVideoCardProps = {
     id: string;
     title: string;
-  }
-  export let video: YouTubeVideo;
-  const videoUrl = `https://youtu.be/${video.id}`;
-  const thumbnail = `https://i3.ytimg.com/vi/${video.id}/maxresdefault.jpg`;
+  };
+  let { id, title }: YouTubeVideoCardProps = $props();
+
+  const videoUrl = `https://youtu.be/${id}`;
+  const thumbnail = `https://i3.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
   // Clip length to 9 words
   const videoTitle =
-    video.title.length > 9
-      ? video.title.split(" ").slice(0, 9).join(" ") + "..."
-      : video.title;
+    title.length > 9 ? title.split(" ").slice(0, 9).join(" ") + "..." : title;
 </script>
 
 <a

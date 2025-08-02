@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button } from "$lib/components/ui/button";
+  import { Button } from "kosui";
 
   let copied: boolean;
 
@@ -17,10 +17,9 @@
 </script>
 
 <Button
-  variant="secondary"
   class="min-w-[140px]"
   type="button"
-  on:click={() => copyToClipboard(text)}
+  onclick={() => copyToClipboard(text)}
 >
   {#if copied}
     Copied!
