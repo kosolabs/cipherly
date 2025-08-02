@@ -9,6 +9,9 @@
     },
     {
       "path": "backend"
+    },
+    {
+      "path": "../kosui"
     }
   ],
   "settings": {

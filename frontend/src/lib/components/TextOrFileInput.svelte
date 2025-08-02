@@ -55,13 +55,13 @@
 <input id="fileInput" type="file" multiple={false} bind:files hidden />
 {#if file}
   <div
-    class="flex items-center justify-between rounded-md border bg-accent px-3 py-4"
+    class="bg-accent flex items-center justify-between rounded-md border px-3 py-4"
   >
     <div class="flex items-center space-x-3">
       <FileText class="w-5 text-slate-400" />
       <div class="space-y-[-3px]">
         <div class="text-md">{file.name}</div>
-        <div class="text-xs text-muted-foreground">
+        <div class="text-muted-foreground text-xs">
           {filesize(file.size)}
         </div>
       </div>
@@ -73,7 +73,7 @@
 {:else}
   <div class="space-y-2">
     <textarea
-      class="flex min-h-[80px] w-full rounded-md border-2 border-input bg-background px-3 py-2 text-base text-foreground ring-offset-background placeholder:text-muted-foreground focus:ring-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+      class="border-input bg-background text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border-2 px-3 py-2 text-base focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
       placeholder={`Enter the ${placeholder} or drag and drop a ${placeholder} file here`}
       bind:value={text}
       on:drop={(e) => drop(e)}

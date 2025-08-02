@@ -11,7 +11,7 @@
   }[];
 </script>
 
-<div class="border-b-4 border-accent">
+<div class="border-accent border-b-4">
   <nav
     class="-mb-px flex justify-center space-x-2 md:space-x-8"
     aria-label="Tabs"
@@ -20,10 +20,10 @@
       {#if item.href}
         <a
           class={cn(
-            "-mb-[3px] flex items-center whitespace-nowrap border-b-4 border-transparent px-1 py-2 text-base font-semibold md:text-lg",
+            "-mb-[3px] flex items-center border-b-4 border-transparent px-1 py-2 text-base font-semibold whitespace-nowrap md:text-lg",
             $page.url.pathname !== "/" &&
               item.href.startsWith($page.url.pathname)
-              ? "border-b-4 border-primary text-primary"
+              ? "border-primary text-primary border-b-4"
               : "border-accent text-muted-foreground hover:border-muted-foreground hover:text-foreground",
             item.disabled && "cursor-not-allowed opacity-80",
           )}

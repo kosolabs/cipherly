@@ -5,7 +5,7 @@
   import PrimaryNav from "$lib/components/PrimaryNav.svelte";
   import { Lock, Unlock } from "@lucide/svelte";
   import { ModeWatcher } from "mode-watcher";
-  import "../app.pcss";
+  import "../app.css";
 </script>
 
 <ModeWatcher />
@@ -28,7 +28,7 @@
       ]}
     />
     <main
-      class="flex w-full flex-1 flex-col overflow-hidden bg-background p-4 lg:p-10"
+      class="bg-background flex w-full flex-1 flex-col overflow-hidden p-4 lg:p-10"
     >
       <slot />
     </main>

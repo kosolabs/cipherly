@@ -35,13 +35,13 @@
       {@const text = data.map(decodeUtf8).join("")}
       <Label
         for="payload"
-        class="text-background-foreground text-sm uppercase tracking-wider"
+        class="text-background-foreground text-sm tracking-wider uppercase"
       >
         Ciphertext Payload
       </Label>
       <Textarea
         id="payload"
-        class="focus-visible:ring-none disabled:opacity-1 border-2 border-muted text-base focus-visible:outline-none disabled:cursor-text disabled:text-green-600"
+        class="focus-visible:ring-none border-muted border-2 text-base focus-visible:outline-none disabled:cursor-text disabled:text-green-600 disabled:opacity-1"
         disabled
         value={text}
         placeholder="The plain text secret to encrypt"
