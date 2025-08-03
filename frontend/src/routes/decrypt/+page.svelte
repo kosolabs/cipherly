@@ -8,12 +8,11 @@
     isPasswordPayload,
     passwordDecrypt,
   } from "$lib/cipherly";
-  import Input from "$lib/components/Input.svelte";
   import Label from "$lib/components/Label.svelte";
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
   import ValidationError from "$lib/components/ValidationError.svelte";
-  import { Button } from "kosui";
+  import { Button, Input } from "kosui";
   import { z } from "zod";
   import Auth from "./auth.svelte";
 
@@ -149,9 +148,11 @@
         <Label for="password">Password</Label>
         <ValidationError {error} path="password" />
         <Input
+          variant="plain"
           id="password"
           type="password"
           placeholder="The password to use for decryption"
+          class="w-full"
           bind:value={decryptData.password}
         />
       </div>

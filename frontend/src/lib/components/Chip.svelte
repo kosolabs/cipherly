@@ -1,8 +1,7 @@
 <script lang="ts">
   import { Info } from "@lucide/svelte";
-  import { Chip } from "kosui";
+  import { Chip, Input } from "kosui";
   import IconText from "./IconText.svelte";
-  import Input from "./Input.svelte";
 
   export let values: string[] = [];
   export let placeholder = "";
@@ -31,11 +30,12 @@
 </IconText>
 
 <Input
-  class="border-muted text-foreground border-2 text-base focus:ring-0 focus-visible:ring-0"
+  class="w-full"
   {placeholder}
   bind:value={input}
-  on:blur={addAndClear}
-  on:keydown={(e) => {
+  variant="plain"
+  onblur={addAndClear}
+  onkeydown={(e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       addAndClear();

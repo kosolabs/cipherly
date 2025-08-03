@@ -1,19 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&display=swap");
 
 @import "tailwindcss";
-@plugin "@tailwindcss/forms";
+/* @plugin "@tailwindcss/forms"; */
 
 @config '../tailwind.config.ts';
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-  }
-
   :root {
     --md-sys-color-primary: rgb(17 102 130);
     --md-sys-color-surface-tint: rgb(17 102 130);

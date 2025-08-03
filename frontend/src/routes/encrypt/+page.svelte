@@ -2,7 +2,6 @@
   import { authEncrypt, encodePayload, passwordEncrypt } from "$lib/cipherly";
   import Chip from "$lib/components/Chip.svelte";
   import IconText from "$lib/components/IconText.svelte";
-  import Input from "$lib/components/Input.svelte";
   import Label from "$lib/components/Label.svelte";
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
@@ -10,7 +9,7 @@
   import * as Tabs from "$lib/components/ui/tabs";
   import ValidationError from "$lib/components/ValidationError.svelte";
   import { KeyRound, User } from "@lucide/svelte";
-  import { Button } from "kosui";
+  import { Button, Input } from "kosui";
   import { z } from "zod";
 
   const EncryptData = z
@@ -134,6 +133,8 @@
             <Input
               id="password"
               type="password"
+              class="w-full"
+              variant="plain"
               placeholder="The password to use for encryption"
               bind:value={encrypt.password}
             />
