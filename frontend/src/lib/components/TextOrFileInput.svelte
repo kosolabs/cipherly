@@ -2,7 +2,7 @@
   import { encodeUtf8 } from "$lib/cipherly";
   import { FileText, HardDriveUpload, XCircle } from "@lucide/svelte";
   import { filesize } from "filesize";
-  import { Button } from "kosui";
+  import { Button, Textarea } from "kosui";
   import { z } from "zod";
 
   const schema = z
@@ -70,12 +70,13 @@
   </div>
 {:else}
   <div class="space-y-2">
-    <textarea
-      class="border-input bg-background text-foreground ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[80px] w-full rounded-md border-2 px-3 py-2 text-base focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+    <Textarea
+      class="w-full"
+      variant="plain"
       placeholder={`Enter the ${placeholder} or drag and drop a ${placeholder} file here`}
       bind:value={text}
-      on:drop={(e) => drop(e)}
-    ></textarea>
+      ondrop={(e) => drop(e)}
+    />
 
     {#if !text}
       <Button icon={HardDriveUpload} onclick={(e) => handleUpload(e)}>

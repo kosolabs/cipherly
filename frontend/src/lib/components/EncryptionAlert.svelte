@@ -1,13 +1,13 @@
 <script lang="ts">
-  import * as Alert from "$lib/components/ui/alert";
+  import { Alert } from "kosui";
 
   export let title: string;
   export let error: { status?: number; name: string; message?: string };
 </script>
 
-<Alert.Root variant="destructive" class="space-y-2 rounded">
-  <Alert.Title>{title}</Alert.Title>
-  <Alert.Description>
+<Alert variant="outlined" color="error">
+  <div>{title}</div>
+  <div class="text-sm">
     {#if error?.status === 401}
       Unauthorized
     {:else if error?.name === "OperationError"}
@@ -17,5 +17,5 @@
     {:else}
       {error}
     {/if}
-  </Alert.Description>
-</Alert.Root>
+  </div>
+</Alert>

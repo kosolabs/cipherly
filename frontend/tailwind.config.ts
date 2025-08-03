@@ -1,4 +1,3 @@
-import formsPlugin from "@tailwindcss/forms";
 import { Config } from "tailwindcss";
 
 function m3(prop: string): string {
@@ -112,7 +111,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [formsPlugin],
 };
 
 export default config;

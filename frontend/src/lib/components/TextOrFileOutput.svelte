@@ -1,5 +1,6 @@
 <script lang="ts">
   import { decodeUtf8 } from "$lib/cipherly";
+  import { Textarea } from "kosui";
   import CopyText from "./CopyText.svelte";
   import EncryptionAlert from "./EncryptionAlert.svelte";
   import { Label } from "./ui/label";
@@ -38,13 +39,13 @@
       >
         Ciphertext Payload
       </Label>
-      <textarea
+      <Textarea
         id="payload"
-        class="border-m3-secondary/40 text-m3-primary w-full rounded-lg shadow"
-        disabled
+        class="w-full"
+        variant="plain"
         value={text}
         placeholder="The plain text secret to encrypt"
-      ></textarea>
+      />
       <div class="space-x-2 pt-4">
         <CopyText label="Ciphertext" {text} />
       </div>
