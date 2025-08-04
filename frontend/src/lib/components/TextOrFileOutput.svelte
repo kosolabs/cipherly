@@ -3,7 +3,7 @@
   import { Skeleton, Textarea } from "kosui";
   import CopyText from "./CopyText.svelte";
   import EncryptionAlert from "./EncryptionAlert.svelte";
-  import { Label } from "./ui/label";
+  import Label from "./Label.svelte";
 
   export let kind: string;
   export let data: Promise<Uint8Array[]>;

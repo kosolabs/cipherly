@@ -1,10 +1,16 @@
-<script>
-  import { Label } from "./ui/label";
+<script lang="ts">
+  import type { Snippet } from "svelte";
+  import type { HTMLLabelAttributes } from "svelte/elements";
+
+  export type LabelProps = {
+    children: Snippet;
+  } & HTMLLabelAttributes;
+  let { children, ...restProps }: LabelProps = $props();
 </script>
 
-<Label
+<label
   class="text-background-foreground text-sm tracking-wider uppercase"
-  {...$$restProps}
+  {...restProps}
 >
-  <slot />
-</Label>
+  {@render children()}
+</label>
