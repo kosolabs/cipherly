@@ -84,9 +84,8 @@ jobs:
         run: |
           TAG="gcr.io/cipherly/cipherly/${{ github.sha }}_$(date +%s%3N)"
           docker build -t $TAG .
-          IMAGE_ID="$(docker images -q $TAG)"
-          echo image-id=$IMAGE_ID >> "$GITHUB_OUTPUT"
+          echo image-tag=$TAG >> "$GITHUB_OUTPUT"
       - run: |
           CI=true \
-            CIPHERLY_IMAGE=${{ steps.build-image.outputs.image-id }} \
+            CIPHERLY_IMAGE=${{ steps.build-image.outputs.image-tag }} \
             pnpm test:e2e
