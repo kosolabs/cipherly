@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended", "group:all"],
   "timezone": "America/Los_Angeles",
-  "schedule": ["before 7am on Monday"],
+  "schedule": ["before 10am on Monday"],
   "pinDigests": true,
   "customManagers": [
     {
@@ -35,9 +35,9 @@
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["* 1-7 1 * *"],
+    "schedule": ["* 1-10 1 * *"],
     "automerge": true,
     "platformAutomerge": false,
-    "automergeSchedule": ["* 8-14 * * 1-5"]
+    "automergeSchedule": ["* 10-16 * * 1-5"]
   }
 }
