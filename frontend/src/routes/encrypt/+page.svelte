@@ -5,10 +5,9 @@
   import Label from "$lib/components/Label.svelte";
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
-  import * as Tabs from "$lib/components/ui/tabs";
   import ValidationError from "$lib/components/ValidationError.svelte";
   import { KeyRound, User } from "@lucide/svelte";
-  import { Box, Button, Input } from "kosui";
+  import { Box, Button, Input, ToggleButton, ToggleGroup } from "kosui";
   import { z } from "zod";
 
   const EncryptData = z
@@ -107,43 +106,40 @@
 
     <div>
       <Label for="mode">Encryption Type</Label>
-      <Tabs.Root id="mode" bind:value={encrypt.mode}>
-        <Tabs.List class="grid h-auto w-full grid-cols-2">
-          <Tabs.Trigger value="policy">
-            <IconText icon={User}>Policy</IconText>
-          </Tabs.Trigger>
-          <Tabs.Trigger value="password">
-            <IconText icon={KeyRound}>Password</IconText>
-          </Tabs.Trigger>
-        </Tabs.List>
-        <Box
-          variant="elevated"
-          shape="rounded"
-          class="mt-2 border px-4 pt-1 pb-2"
-        >
-          <Tabs.Content value="policy">
-            <Label for="emails">Authorized Emails</Label>
-            <ValidationError {error} path="emails" />
-            <Chip
-              id="emails"
-              bind:values={encrypt.emails}
-              placeholder="List of email addresses authorized to decrypt"
-            />
-          </Tabs.Content>
-          <Tabs.Content value="password">
-            <Label for="password">Password</Label>
-            <ValidationError {error} path="password" />
-            <Input
-              id="password"
-              type="password"
-              class="w-full"
-              variant="plain"
-              placeholder="The password to use for encryption"
-              bind:value={encrypt.password}
-            />
-          </Tabs.Content>
-        </Box>
-      </Tabs.Root>
+      <ToggleGroup bind:value={encrypt.mode}>
+        <ToggleButton value="policy">
+          <IconText icon={User}>Policy</IconText>
+        </ToggleButton>
+        <ToggleButton value="password">
+          <IconText icon={KeyRound}>Password</IconText>
+        </ToggleButton>
+      </ToggleGroup>
+      <Box
+        variant="elevated"
+        shape="rounded"
+        class="mt-2 border px-4 pt-1 pb-2"
+      >
+        {#if encrypt.mode === "policy"}
+          <Label for="emails">Authorized Emails</Label>
+          <ValidationError {error} path="emails" />
+          <Chip
+            id="emails"
+            bind:values={encrypt.emails}
+            placeholder="List of email addresses authorized to decrypt"
+          />
+        {:else if encrypt.mode === "password"}
+          <Label for="password">Password</Label>
+          <ValidationError {error} path="password" />
+          <Input
+            id="password"
+            type="password"
+            class="w-full"
+            variant="plain"
+            placeholder="The password to use for encryption"
+            bind:value={encrypt.password}
+          />
+        {/if}
+      </Box>
     </div>
 
     <Button
