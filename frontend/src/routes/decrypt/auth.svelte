@@ -2,10 +2,9 @@
   import googleLogo from "$lib/assets/google.svg";
   import type { User } from "$lib/auth";
   import Avatar from "$lib/components/Avatar.svelte";
-  import Skeleton from "$lib/components/ui/skeleton/skeleton.svelte";
   import { GoogleOAuthProvider, googleLogout } from "google-oauth-gsi";
   import { jwtDecode } from "jwt-decode";
-  import { Button } from "kosui";
+  import { Button, Skeleton } from "kosui";
   import { onMount } from "svelte";
 
   const CREDENTIAL_KEY = "credential";
