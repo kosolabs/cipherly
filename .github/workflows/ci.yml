@@ -79,4 +79,13 @@ jobs:
           restore-keys: ${{ runner.os }}-playwright-
       - run: pnpm exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
-      - run: pnpm test:e2e
+      - id: build-image
+        run: |
+          TAG="gcr.io/cipherly/cipherly/${{ github.sha }}_$(date +%s%3N)"
+          docker build -t $TAG .
+          IMAGE_ID="$(docker images -q $TAG)"
+          echo image-id=$IMAGE_ID >> "$GITHUB_OUTPUT"
+      - run: |
+          CI=true \
+            CIPHERLY_IMAGE=${{ steps.build-image.outputs.image-id }} \
+            pnpm test:e2e

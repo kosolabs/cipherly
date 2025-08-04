@@ -1,10 +1,16 @@
 import type { PlaywrightTestConfig } from "@playwright/test";
 
-const port = 5173;
+const port = process.env.CI ? 8000 : process.env.PW_SERVER_PORT || 5173;
 
 const config: PlaywrightTestConfig = {
   webServer: {
-    command: `pnpm build && pnpm preview --port ${port}`,
+    command: process.env.CIPHERLY_IMAGE
+      ? `docker run \
+        --env KEKS='{"v1":"jRg36ErQ6FLcc7nZgngOpjJnJLGwA3xaMy0yx1pxJrI"}' \
+        --env RUST_LOG=info \
+        --network=host \
+        --rm ${process.env.CIPHERLY_IMAGE}`
+      : `pnpm build && pnpm preview --port ${port}`,
     port,
     reuseExistingServer: true,
     stdout: "pipe",
