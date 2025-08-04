@@ -5,11 +5,10 @@
   import Label from "$lib/components/Label.svelte";
   import TextOrFileInput from "$lib/components/TextOrFileInput.svelte";
   import TextOrFileOutput from "$lib/components/TextOrFileOutput.svelte";
-  import { Card } from "$lib/components/ui/card";
   import * as Tabs from "$lib/components/ui/tabs";
   import ValidationError from "$lib/components/ValidationError.svelte";
   import { KeyRound, User } from "@lucide/svelte";
-  import { Button, Input } from "kosui";
+  import { Box, Button, Input } from "kosui";
   import { z } from "zod";
 
   const EncryptData = z
@@ -117,7 +116,11 @@
             <IconText icon={KeyRound}>Password</IconText>
           </Tabs.Trigger>
         </Tabs.List>
-        <Card class="mt-2 px-4 pb-4">
+        <Box
+          variant="elevated"
+          shape="rounded"
+          class="mt-2 border px-4 pt-1 pb-2"
+        >
           <Tabs.Content value="policy">
             <Label for="emails">Authorized Emails</Label>
             <ValidationError {error} path="emails" />
@@ -139,7 +142,7 @@
               bind:value={encrypt.password}
             />
           </Tabs.Content>
-        </Card>
+        </Box>
       </Tabs.Root>
     </div>
 
