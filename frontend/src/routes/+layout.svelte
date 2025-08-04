@@ -1,7 +1,7 @@
 <script lang="ts">
+  import AppBar from "$lib/components/AppBar.svelte";
   import Footer from "$lib/components/Footer.svelte";
   import PrimaryNav from "$lib/components/PrimaryNav.svelte";
-  import { AppBar } from "$lib/components/ui/app-bar";
   import { Lock, Unlock } from "@lucide/svelte";
   import { ModeWatcher } from "mode-watcher";
   import type { Snippet } from "svelte";
