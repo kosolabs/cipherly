@@ -12,8 +12,9 @@ const config: PlaywrightTestConfig = {
         --rm ${process.env.CIPHERLY_IMAGE}`
       : `pnpm build && pnpm preview --port ${port}`,
     port,
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env.CI,
     stdout: "pipe",
+    timeout: 180000,
   },
   testDir: "e2e",
   fullyParallel: true,
