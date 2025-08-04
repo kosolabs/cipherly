@@ -81,8 +81,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       kosui:
-        specifier: ^0.0.9
-        version: 0.0.9(svelte@5.37.1)
+        specifier: ^0.0.10
+        version: 0.0.10(svelte@5.37.1)
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.37.1)
@@ -1284,8 +1284,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  kosui@0.0.9:
-    resolution: {integrity: sha512-KPlxqNAxtRM4008UlnROlWI9VIZtNwx5A8CmbsylRVda6QvLjS1d+iog117iX1GThNHFlIc6hxXg2b1VhT2grQ==}
+  kosui@0.0.10:
+    resolution: {integrity: sha512-UowHEIYEbHaf9nW40bk73pvIJInR4mEIFcuL3Wp/zvuv7dNMS/sWzZa+SzMUiD4L7BXGfTDTh+LXGt8mdckJUg==}
     engines: {node: '>= 20'}
     peerDependencies:
       svelte: ^5.0.0
@@ -3208,7 +3208,7 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  kosui@0.0.9(svelte@5.37.1):
+  kosui@0.0.10(svelte@5.37.1):
     dependencies:
       marked: 16.1.1
       svelte: 5.37.1

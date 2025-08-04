@@ -1,10 +1,9 @@
 <script lang="ts">
   import { decodeUtf8 } from "$lib/cipherly";
-  import { Textarea } from "kosui";
+  import { Skeleton, Textarea } from "kosui";
   import CopyText from "./CopyText.svelte";
   import EncryptionAlert from "./EncryptionAlert.svelte";
   import { Label } from "./ui/label";
-  import { Skeleton } from "./ui/skeleton";
 
   export let kind: string;
   export let data: Promise<Uint8Array[]>;
