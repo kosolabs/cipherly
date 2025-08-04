@@ -6,10 +6,10 @@
   import Label from "./Label.svelte";
 
   export let kind: string;
-  export let data: Promise<Uint8Array[]>;
+  export let data: Promise<Uint8Array<ArrayBuffer>[]>;
   export let name: string | null = null;
 
-  function save(data: Uint8Array[], name: string) {
+  function save(data: Uint8Array<ArrayBuffer>[], name: string) {
     const blob = new Blob(data, { type: "application/octet-stream" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
