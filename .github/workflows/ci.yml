@@ -80,6 +80,7 @@ jobs:
       - run: pnpm exec playwright install --with-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
       - id: build-image
+        working-directory: ./
         run: |
           TAG="gcr.io/cipherly/cipherly/${{ github.sha }}_$(date +%s%3N)"
           docker build -t $TAG .
