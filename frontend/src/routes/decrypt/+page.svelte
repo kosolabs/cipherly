@@ -91,7 +91,7 @@
   };
 
   let error: z.ZodError | null;
-  let plaintext: Promise<Uint8Array[]> | null = null;
+  let plaintext: Promise<Uint8Array<ArrayBuffer>[]> | null = null;
 
   $: {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions

@@ -56,7 +56,7 @@
   };
 
   let error: z.ZodError | null;
-  let payload: Promise<Uint8Array> | null = null;
+  let payload: Promise<Uint8Array<ArrayBuffer>> | null = null;
 
   $: {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
