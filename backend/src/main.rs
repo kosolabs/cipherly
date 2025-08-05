@@ -1,4 +1,4 @@
-use crate::{google::Certs, kek::Keks};
+use crate::{google::KeySet, kek::Keks};
 use aes_gcm::{
     AeadCore, Aes256Gcm,
     aead::{Aead, OsRng},
@@ -97,6 +97,8 @@ async fn main() {
     tokio::join!(
         async {
             run_server(Config {
+                enable_test_creds: env::var("ENABLE_TEST_CREDS").unwrap_or("false".into())
+                    == "true",
                 shutdown_signal: shutdown_signal.clone(),
                 ..Default::default()
             })
@@ -110,15 +112,16 @@ async fn main() {
 #[derive(Default)]
 pub struct Config {
     pub port: Option<u16>,
-    pub certs: Option<Certs>,
+    pub key_set: Option<KeySet>,
+    pub enable_test_creds: bool,
     pub keks: Option<Keks>,
     pub shutdown_signal: CancellationToken,
 }
 
 async fn run_server(config: Config) -> Result<(SocketAddr, JoinHandle<Result<()>>)> {
-    let certs = match config.certs {
+    let key_set = match config.key_set {
         Some(certs) => certs,
-        None => google::fetch()
+        None => KeySet::new(config.enable_test_creds)
             .await
             .context("Failed to fetch Google certs")?,
     };
@@ -143,7 +146,7 @@ async fn run_server(config: Config) -> Result<(SocketAddr, JoinHandle<Result<()>
         )
         .layer(
             ServiceBuilder::new()
-                .layer((Extension(Arc::new(certs)), Extension(Arc::new(keks))))
+                .layer((Extension(Arc::new(key_set)), Extension(Arc::new(keks))))
                 .layer(SetRequestIdLayer::new(
                     HeaderName::from_static("x-request-id"),
                     MakeRequestUuid,
@@ -253,7 +256,7 @@ async fn set_static_cache_control(request: Request, next: Next) -> Response {
 #[cfg(test)]
 mod tests {
     use crate::{
-        google::{Claims, parse},
+        google::{Claims, testing::new_fake_key_set},
         kek, run_server,
     };
     use anyhow::{Result, anyhow};
@@ -412,13 +415,14 @@ mod tests {
     }
 
     async fn start_server() -> (ServerHandle, SocketAddr) {
-        let certs = parse(include_str!("testdata/certs.json")).unwrap();
+        let key_set = new_fake_key_set(true).unwrap();
         let keks = kek::parse(TEST_KEK).unwrap();
 
         let cancel = CancellationToken::new();
         let (addr, serve) = run_server(crate::Config {
             port: Some(0),
-            certs: Some(certs),
+            key_set: Some(key_set),
+            enable_test_creds: true,
             keks: Some(keks),
             shutdown_signal: cancel.clone(),
         })

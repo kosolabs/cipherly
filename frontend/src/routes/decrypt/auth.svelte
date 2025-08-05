@@ -18,6 +18,13 @@
     sessionStorage.removeItem(CREDENTIAL_KEY);
   }
 
+  function login(newToken: string) {
+    sessionStorage.setItem(CREDENTIAL_KEY, newToken);
+    token = newToken;
+  }
+
+  window.loginn = login;
+
   onMount(() => {
     const googleProvider = new GoogleOAuthProvider({
       clientId:
