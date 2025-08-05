@@ -7,6 +7,7 @@ const config: PlaywrightTestConfig = {
     command: process.env.CIPHERLY_IMAGE
       ? `docker run \
         --env KEKS='{"v1":"jRg36ErQ6FLcc7nZgngOpjJnJLGwA3xaMy0yx1pxJrI"}' \
+        --env ENABLE_TEST_CREDS=true \
         --env RUST_LOG=info \
         --network=host \
         --rm ${process.env.CIPHERLY_IMAGE}`

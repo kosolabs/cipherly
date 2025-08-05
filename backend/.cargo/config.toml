@@ -3,6 +3,7 @@
 RUST_BACKTRACE = "1"
 RUST_LOG = "cipherly=trace,tower_http=trace,axum=trace,info"
 KEKS='{"v1":"jRg36ErQ6FLcc7nZgngOpjJnJLGwA3xaMy0yx1pxJrI"}'
+ENABLE_TEST_CREDS = "true"
 
 [build]
 rustflags = [
