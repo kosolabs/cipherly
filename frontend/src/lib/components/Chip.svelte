@@ -1,12 +1,20 @@
 <script lang="ts">
   import { Info } from "@lucide/svelte";
-  import { Chip, Input } from "kosui";
+  import { Chip, Input, type InputProps } from "kosui";
   import IconText from "./IconText.svelte";
 
-  export let values: string[] = [];
-  export let placeholder = "";
+  type Props = {
+    values?: string[];
+    placeholder?: string;
+  } & InputProps;
 
-  let input: string = "";
+  let {
+    values = $bindable([]),
+    placeholder = "",
+    ...restProps
+  }: Props = $props();
+
+  let input = $state("");
 
   function add(value: string) {
     values = [...new Set([...values, value])];
@@ -25,7 +33,7 @@
   }
 </script>
 
-<IconText class="mb-1 text-xs text-blue-500" icon={Info}>
+<IconText class="text-m3-primary mb-1 text-xs" icon={Info}>
   Press Enter after each entry
 </IconText>
 
@@ -41,7 +49,7 @@
       addAndClear();
     }
   }}
-  {...$$restProps}
+  {...restProps}
 />
 
 {#if values.length > 0}

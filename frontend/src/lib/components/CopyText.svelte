@@ -1,10 +1,14 @@
 <script lang="ts">
   import { Button } from "kosui";
 
-  let copied: boolean;
+  type Props = {
+    label: string;
+    text: string;
+  };
 
-  export let label: string;
-  export let text: string;
+  let { label, text }: Props = $props();
+
+  let copied: boolean = $state(false);
 
   function copyToClipboard(text: string | null): void {
     if (!text) return;

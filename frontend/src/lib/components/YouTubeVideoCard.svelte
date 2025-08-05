@@ -1,11 +1,11 @@
 <script lang="ts">
   import youTubeLogo from "$lib/assets/youtube.svg";
 
-  export type YouTubeVideoCardProps = {
+  type Props = {
     id: string;
     title: string;
   };
-  let { id, title }: YouTubeVideoCardProps = $props();
+  let { id, title }: Props = $props();
 
   const videoUrl = `https://youtu.be/${id}`;
   const thumbnail = `https://i3.ytimg.com/vi/${id}/maxresdefault.jpg`;

@@ -1,8 +1,12 @@
 <script lang="ts">
   import { Alert } from "kosui";
 
-  export let title: string;
-  export let error: { status?: number; name: string; message?: string };
+  type Props = {
+    title: string;
+    error: { status?: number; name: string; message?: string };
+  };
+
+  let { title, error }: Props = $props();
 </script>
 
 <Alert variant="outlined" color="error">

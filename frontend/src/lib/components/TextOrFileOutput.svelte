@@ -1,26 +1,29 @@
 <script lang="ts">
   import { decodeUtf8 } from "$lib/cipherly";
   import { Skeleton, Textarea } from "kosui";
+  import { onMount } from "svelte";
   import CopyText from "./CopyText.svelte";
   import EncryptionAlert from "./EncryptionAlert.svelte";
   import Label from "./Label.svelte";
 
-  export let kind: string;
-  export let data: Promise<Uint8Array<ArrayBuffer>[]>;
-  export let name: string | null = null;
+  type Props = {
+    kind: string;
+    data: Promise<Uint8Array<ArrayBuffer>[]>;
+    name?: string;
+  };
 
-  function save(data: Uint8Array<ArrayBuffer>[], name: string) {
-    const blob = new Blob(data, { type: "application/octet-stream" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = name;
-    a.click();
-  }
+  let { kind, data, name }: Props = $props();
 
-  $: if (name !== null) {
-    data.then((data) => save(data, name));
-  }
+  onMount(async () => {
+    if (name !== undefined) {
+      const blob = new Blob(await data, { type: "application/octet-stream" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = name;
+      a.click();
+    }
+  });
 </script>
 
 <div>

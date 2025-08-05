@@ -9,8 +9,12 @@
 
   const CREDENTIAL_KEY = "credential";
 
-  export let token: string | null =
-    sessionStorage.getItem(CREDENTIAL_KEY) || null;
+  type Props = {
+    token: string | null;
+  };
+  let {
+    token = $bindable(sessionStorage.getItem(CREDENTIAL_KEY) || null),
+  }: Props = $props();
 
   function logout() {
     googleLogout();
@@ -46,7 +50,7 @@
     });
   });
 
-  function decodeUser(token: string | null): User | null {
+  let user = $derived.by(() => {
     if (token === null) {
       return null;
     }
@@ -55,9 +59,7 @@
       return null;
     }
     return user;
-  }
-
-  $: user = decodeUser(token);
+  });
 </script>
 
 <div class={user === null ? "" : "hidden"}>

@@ -1,17 +1,21 @@
 <script lang="ts">
-  import { AlertCircle } from "@lucide/svelte";
+  import { CircleAlert } from "@lucide/svelte";
   import type { ZodError } from "zod";
   import IconText from "./IconText.svelte";
 
-  export let path: string;
-  export let error: ZodError | null;
+  type Props = {
+    path: string;
+    error: ZodError | null;
+  };
+  let { path, error }: Props = $props();
 
-  let message: string | undefined;
-  $: message = error?.issues.find((e) => e.path.includes(path))?.message;
+  let message: string | undefined = $derived(
+    error?.issues.find((e) => e.path.includes(path))?.message,
+  );
 </script>
 
 {#if message}
-  <IconText class="text-destructive mb-1 text-xs" icon={AlertCircle}>
+  <IconText class="text-destructive mb-1 text-xs" icon={CircleAlert}>
     {message}
   </IconText>
 {/if}
