@@ -8,6 +8,10 @@ declare global {
     // interface PageState {}
     // interface Platform {}
   }
+
+  interface Window {
+    set_login_token(token: string);
+  }
 }
 
 export {};
