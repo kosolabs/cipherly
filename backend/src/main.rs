@@ -97,8 +97,9 @@ async fn main() {
     tokio::join!(
         async {
             run_server(Config {
-                enable_test_creds: env::var("ENABLE_TEST_CREDS").unwrap_or("false".into())
-                    == "true",
+                enable_test_creds: env::var("ENABLE_TEST_CREDS")
+                    .map(|e| e == "true")
+                    .unwrap_or(false),
                 shutdown_signal: shutdown_signal.clone(),
                 ..Default::default()
             })

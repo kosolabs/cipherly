@@ -30,7 +30,7 @@ pub struct KeySet {
 }
 
 #[derive(Debug, Serialize, Deserialize)]
-pub struct Certs {
+struct Certs {
     keys: Vec<Key>,
 }
 
