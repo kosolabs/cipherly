@@ -1,5 +1,11 @@
 import { expect, test } from "@playwright/test";
 
+declare global {
+  interface Window {
+    login: (token: string) => void;
+  }
+}
+
 test.describe.configure({ mode: "parallel" });
 
 test.describe("Auth Tests", () => {
@@ -34,7 +40,7 @@ test.describe("Auth Tests", () => {
       .getByRole("textbox", { name: "Enter the ciphertext payload" })
       .click();
     await page.keyboard.press("ControlOrMeta+V");
-    await page.evaluate(([token]) => window.loginn(token), [token]);
+    await page.evaluate(([token]) => window.login(token), [token]);
     await page.getByRole("button", { name: "Decrypt" }).click();
 
     // Verify the plain text matches what we encrypted initially.
