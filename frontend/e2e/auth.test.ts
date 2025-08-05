@@ -45,11 +45,6 @@ test.describe("Auth Tests", () => {
     await page.getByRole("button", { name: "Decrypt" }).click();
 
     // Verify the plain text matches what we encrypted initially.
-    // TODO
-    // await expect(
-    //   page.getByRole("textbox", { name: "Ciphertext Payload Ciphertext" }),
-    // ).toHaveText(/.*Some secret.*/);
-
     await page.getByRole("button", { name: "Copy Ciphertext" }).click();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toEqual(
       "Some secret",
