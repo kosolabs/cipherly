@@ -13,10 +13,10 @@
   const EncryptData = z
     .object({
       data: z.instanceof(Uint8Array),
-      filename: z.string().nullable(),
+      filename: z.string().optional(),
       mode: z.enum(["policy", "password"]),
       password: z.string().default(""),
-      emails: z.array(z.string().email()),
+      emails: z.array(z.email()),
     })
     .check(({ issues, value }) => {
       if (value.mode === "policy" && value.emails.length === 0) {
@@ -49,7 +49,6 @@
 
   let encrypt: EncryptData = $state({
     data: new Uint8Array(),
-    filename: null,
     mode: "policy",
     password: "",
     emails: [],
@@ -98,7 +97,7 @@
       <ValidationError {error} path="plaintext" />
       <TextOrFileInput
         placeholder="plaintext secret"
-        onInput={(data, filename) => {
+        onInput={(data, filename?) => {
           encrypt.data = data;
           encrypt.filename = filename;
           clear();

@@ -8,7 +8,7 @@
   type Props = {
     text?: string;
     placeholder: string;
-    onInput: (data: Uint8Array<ArrayBuffer>, filename: string | null) => void;
+    onInput: (data: Uint8Array<ArrayBuffer>, filename?: string) => void;
   };
 
   let { text = "", placeholder, onInput }: Props = $props();
@@ -16,21 +16,21 @@
   const schema = z
     .object({
       text: z.string(),
-      file: z.instanceof(File).nullable(),
+      file: z.instanceof(File).optional(),
     })
     .transform(async ({ text, file }) => {
-      if (file !== null) {
+      if (file) {
         return {
           data: new Uint8Array(await file.arrayBuffer()),
           filename: file?.name,
         };
       }
-      return { data: encodeUtf8(text), filename: null };
+      return { data: encodeUtf8(text) };
     });
 
   let fileInputEl: HTMLInputElement | undefined = $state();
   let files: FileList | undefined = $state();
-  let file = $derived(files?.item(0) ?? null);
+  let file = $derived(files?.item(0) ?? undefined);
 
   $effect(() => {
     schema
@@ -60,7 +60,7 @@
         if (fileInputEl) {
           fileInputEl.value = "";
         }
-        onInput(new Uint8Array(), null);
+        onInput(new Uint8Array());
       }}
     />
   </div>
