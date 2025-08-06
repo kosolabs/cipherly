@@ -10,24 +10,27 @@
   const CREDENTIAL_KEY = "credential";
 
   type Props = {
-    token: string | null;
+    onToken: (token?: string) => void;
   };
-  let {
-    token = $bindable(sessionStorage.getItem(CREDENTIAL_KEY) || null),
-  }: Props = $props();
+  let { onToken }: Props = $props();
+  let token: string | undefined = $state();
 
   function logout() {
-    googleLogout();
-    token = null;
-    sessionStorage.removeItem(CREDENTIAL_KEY);
+    setLoginToken();
   }
 
-  function set_login_token(newToken: string) {
-    sessionStorage.setItem(CREDENTIAL_KEY, newToken);
+  function setLoginToken(newToken?: string) {
+    if (newToken) {
+      sessionStorage.setItem(CREDENTIAL_KEY, newToken);
+    } else {
+      googleLogout();
+      sessionStorage.removeItem(CREDENTIAL_KEY);
+    }
     token = newToken;
+    onToken(newToken);
   }
 
-  window.set_login_token = set_login_token;
+  window.setLoginToken = setLoginToken;
 
   onMount(() => {
     const googleProvider = new GoogleOAuthProvider({
@@ -42,8 +45,7 @@
               console.error("Credential is missing", res);
               return;
             }
-            token = res.credential;
-            sessionStorage.setItem(CREDENTIAL_KEY, res.credential);
+            setLoginToken(res.credential);
           },
         })();
       },
@@ -51,24 +53,24 @@
   });
 
   let user = $derived.by(() => {
-    if (token === null) {
-      return null;
+    if (token === undefined) {
+      return;
     }
     const user = jwtDecode(token) as User;
     if (user.exp * 1000 < Date.now()) {
-      return null;
+      return;
     }
     return user;
   });
 </script>
 
-<div class={user === null ? "" : "hidden"}>
+<div class={user ? "hidden" : ""}>
   <div id="login-button" class="w-[200px]" style="color-scheme:light">
     <Skeleton class="h-10" />
   </div>
 </div>
 
-{#if user !== null && token !== null}
+{#if user && token}
   <div class="flex items-center space-x-4">
     <div
       class="bg-muted text-muted-foreground flex items-center space-x-4 rounded-3xl px-4 py-2"

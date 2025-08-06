@@ -3,7 +3,7 @@ import { generateEmail, jwt } from "./utils";
 
 declare global {
   interface Window {
-    set_login_token: (token: string) => void;
+    setLoginToken: (token: string) => void;
   }
 }
 
@@ -41,7 +41,7 @@ test.describe("Auth Tests", () => {
       .getByRole("textbox", { name: "Enter the ciphertext payload" })
       .click();
     await page.keyboard.press("ControlOrMeta+V");
-    await page.evaluate(([token]) => window.set_login_token(token), [token]);
+    await page.evaluate(([token]) => window.setLoginToken(token), [token]);
     await page.getByRole("button", { name: "Decrypt" }).click();
 
     // Verify the plain text matches what we encrypted initially.

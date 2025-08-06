@@ -19,15 +19,15 @@
   const InputData = z
     .object({
       data: z.instanceof(Uint8Array),
-      filename: z.string().nullable(),
+      filename: z.string().optional(),
     })
     .transform(({ data, filename }, ctx) => {
-      if (data.length !== 0 || filename !== null) {
+      if (data.length !== 0 || filename) {
         try {
           return decodePayload(data, !!filename);
         } catch (_error) {
           ctx.addIssue({
-            code: z.ZodIssueCode.custom,
+            code: "custom",
             message: "Invalid Cipherly payload",
             path: ["payload"],
             fatal: true,
@@ -42,7 +42,7 @@
     .object({
       payload: Payload.nullable(),
       password: z.string().default(""),
-      token: z.string().nullable(),
+      token: z.string().optional(),
     })
     .transform(({ payload, password, token }, ctx) => {
       if (isPasswordPayload(payload)) {
@@ -82,7 +82,6 @@
   let decryptData: DecryptData = $state({
     payload: null,
     password: "",
-    token: null,
   });
 
   let error: z.ZodError | null = $state(null);
@@ -119,7 +118,7 @@
       <TextOrFileInput
         text={location.hash ? location.href : ""}
         placeholder="ciphertext payload"
-        onInput={async (data, filename) => {
+        onInput={async (data, filename?) => {
           const result = await InputData.safeParseAsync({ data, filename });
           if (result.success) {
             decryptData.payload = result.data;
@@ -149,7 +148,7 @@
     {:else if decryptData.payload?.es === EncryptionScheme.Auth}
       <div>
         <ValidationError {error} path="token" />
-        <Auth bind:token={decryptData.token} />
+        <Auth onToken={(token) => (decryptData.token = token)} />
       </div>
     {/if}
 

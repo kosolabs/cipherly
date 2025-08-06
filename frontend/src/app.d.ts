@@ -10,7 +10,7 @@ declare global {
   }
 
   interface Window {
-    set_login_token(token: string);
+    setLoginToken(token: string);
   }
 }
 
