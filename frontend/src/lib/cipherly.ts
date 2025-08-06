@@ -167,8 +167,6 @@ export const AuthPayload = PayloadHeader.merge(AuthBody);
 export type AuthPayload = z.infer<typeof AuthPayload>;
 
 export function isAuthPayload(payload: unknown): payload is AuthPayload {
-  const parsed = AuthPayload.safeParse(payload);
-  console.log(parsed.error);
   return AuthPayload.safeParse(payload).success;
 }
 
@@ -192,7 +190,7 @@ export const Payload = z.union([PasswordPayload, AuthPayload]);
 export type Payload = z.infer<typeof Payload>;
 
 function decryptUrl() {
-  return `${location.protocol}//${location.host}/decrypt/#`;
+  return `${location.protocol}//${location.host}/decrypt#`;
 }
 
 export function encodePayload(

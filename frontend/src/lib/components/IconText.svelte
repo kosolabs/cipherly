@@ -1,18 +1,18 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
   import { Icon } from "@lucide/svelte";
+  import type { Snippet } from "svelte";
   import type { HTMLAttributes } from "svelte/elements";
 
-  type $$Props = HTMLAttributes<HTMLDivElement> & {
+  type Props = {
     icon: typeof Icon;
-  };
-  let className: $$Props["class"] = undefined;
+    children: Snippet;
+  } & HTMLAttributes<HTMLDialogElement>;
 
-  export let icon: typeof Icon;
-  export { className as class };
+  let { children, icon: IconComponent, class: className }: Props = $props();
 </script>
 
 <div class={cn("flex items-center", className)}>
-  <svelte:component this={icon} class="mr-1 inline-block h-[14px] w-[14px]" />
-  <slot />
+  <IconComponent class="mr-1 inline-block h-[14px] w-[14px]" />
+  {@render children()}
 </div>

@@ -1,9 +1,17 @@
 <script lang="ts">
   import { encodeUtf8 } from "$lib/cipherly";
-  import { FileText, HardDriveUpload, XCircle } from "@lucide/svelte";
+  import { CircleX, FileText, HardDriveUpload } from "@lucide/svelte";
   import { filesize } from "filesize";
   import { Button, Textarea } from "kosui";
   import { z } from "zod";
+
+  type Props = {
+    text?: string;
+    placeholder: string;
+    onInput: (data: Uint8Array<ArrayBuffer>, filename: string | null) => void;
+  };
+
+  let { text = "", placeholder, onInput }: Props = $props();
 
   const schema = z
     .object({
@@ -20,39 +28,18 @@
       return { data: encodeUtf8(text), filename: null };
     });
 
-  let files: FileList | null = null;
-  export let text: string = "";
-  export let placeholder: string;
-  export let data: Uint8Array = new Uint8Array();
-  export let filename: string | null;
+  let fileInputEl: HTMLInputElement | undefined = $state();
+  let files: FileList | undefined = $state();
+  let file = $derived(files?.item(0) ?? null);
 
-  async function parse(text: string, file: File | null) {
-    const output = await schema.parseAsync({ text, file });
-    data = output.data;
-    filename = output.filename;
-  }
-
-  function handleUpload(_event: unknown) {
-    document.getElementById("fileInput")?.click();
-  }
-
-  function clearUpload() {
-    (document.getElementById("fileInput") as HTMLInputElement).value = "";
-    file = null;
-    data = new Uint8Array();
-    filename = null;
-  }
-
-  function drop(event: DragEvent) {
-    event.preventDefault();
-    files = event.dataTransfer?.files ?? null;
-  }
-
-  $: file = files?.item(0) ?? null;
-  $: parse(text, file);
+  $effect(() => {
+    schema
+      .parseAsync({ text, file })
+      .then(({ data, filename }) => onInput(data, filename));
+  });
 </script>
 
-<input id="fileInput" type="file" multiple={false} bind:files hidden />
+<input bind:this={fileInputEl} type="file" multiple={false} bind:files hidden />
 {#if file}
   <div
     class="bg-accent flex items-center justify-between rounded-md border px-3 py-4"
@@ -66,7 +53,16 @@
         </div>
       </div>
     </div>
-    <Button variant="plain" icon={XCircle} onclick={clearUpload} />
+    <Button
+      variant="plain"
+      icon={CircleX}
+      onclick={() => {
+        if (fileInputEl) {
+          fileInputEl.value = "";
+        }
+        onInput(new Uint8Array(), null);
+      }}
+    />
   </div>
 {:else}
   <div class="space-y-2">
@@ -75,11 +71,21 @@
       variant="plain"
       placeholder={`Enter the ${placeholder} or drag and drop a ${placeholder} file here`}
       bind:value={text}
-      ondrop={(e) => drop(e)}
+      ondrop={(event) => {
+        event.preventDefault();
+        files = event.dataTransfer?.files;
+      }}
     />
 
     {#if !text}
-      <Button icon={HardDriveUpload} onclick={(e) => handleUpload(e)}>
+      <Button
+        icon={HardDriveUpload}
+        onclick={() => {
+          if (fileInputEl) {
+            fileInputEl.click();
+          }
+        }}
+      >
         Upload {placeholder} file
       </Button>
     {/if}

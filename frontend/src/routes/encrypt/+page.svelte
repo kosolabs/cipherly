@@ -47,20 +47,18 @@
     });
   type EncryptData = z.input<typeof EncryptData>;
 
-  let encrypt: EncryptData = {
+  let encrypt: EncryptData = $state({
     data: new Uint8Array(),
     filename: null,
     mode: "policy",
     password: "",
     emails: [],
-  };
+  });
 
-  let error: z.ZodError | null;
-  let payload: Promise<Uint8Array<ArrayBuffer>> | null = null;
+  let error: z.ZodError | null = $state(null);
+  let payload: Promise<Uint8Array<ArrayBuffer>> | null = $state(null);
 
-  $: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    encrypt;
+  function clear() {
     payload = null;
     error = null;
   }
@@ -69,7 +67,8 @@
 <div class="space-y-8 p-1">
   <form
     class="space-y-4"
-    on:submit|preventDefault={() => {
+    onsubmit={(e) => {
+      e.preventDefault();
       const parsed = EncryptData.safeParse(encrypt);
       if (!parsed.success) {
         error = parsed.error;
@@ -98,15 +97,18 @@
       <Label for="plaintext">Plaintext</Label>
       <ValidationError {error} path="plaintext" />
       <TextOrFileInput
-        bind:data={encrypt.data}
-        bind:filename={encrypt.filename}
         placeholder="plaintext secret"
+        onInput={(data, filename) => {
+          encrypt.data = data;
+          encrypt.filename = filename;
+          clear();
+        }}
       />
     </div>
 
     <div>
       <Label for="mode">Encryption Type</Label>
-      <ToggleGroup bind:value={encrypt.mode}>
+      <ToggleGroup bind:value={encrypt.mode} onChange={clear}>
         <ToggleButton value="policy">
           <IconText icon={User}>Policy</IconText>
         </ToggleButton>
@@ -125,6 +127,7 @@
           <Chip
             id="emails"
             bind:values={encrypt.emails}
+            onchange={clear}
             placeholder="List of email addresses authorized to decrypt"
           />
         {:else if encrypt.mode === "password"}
@@ -133,10 +136,12 @@
           <Input
             id="password"
             type="password"
+            autocomplete="off"
             class="w-full"
             variant="plain"
             placeholder="The password to use for encryption"
             bind:value={encrypt.password}
+            onchange={clear}
           />
         {/if}
       </Box>
@@ -155,7 +160,7 @@
     <TextOrFileOutput
       kind="Encrypt"
       data={payload.then((data) => encodePayload(data, !!encrypt.filename))}
-      name={encrypt.filename ? encrypt.filename + ".cly" : null}
+      name={encrypt.filename ? encrypt.filename + ".cly" : undefined}
     />
   {/if}
 </div>

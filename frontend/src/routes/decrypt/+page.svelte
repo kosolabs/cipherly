@@ -38,11 +38,6 @@
     });
   type InputData = z.input<typeof InputData>;
 
-  let inputData: InputData = {
-    data: new Uint8Array(),
-    filename: null,
-  };
-
   const DecryptData = z
     .object({
       payload: Payload.nullable(),
@@ -84,31 +79,17 @@
     });
   type DecryptData = z.input<typeof DecryptData>;
 
-  let decryptData: DecryptData = {
+  let decryptData: DecryptData = $state({
     payload: null,
     password: "",
     token: null,
-  };
+  });
 
-  let error: z.ZodError | null;
-  let plaintext: Promise<Uint8Array<ArrayBuffer>[]> | null = null;
+  let error: z.ZodError | null = $state(null);
+  let plaintext: Promise<Uint8Array<ArrayBuffer>[]> | null = $state(null);
 
-  $: {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    inputData;
-    plaintext = null;
-    InputData.safeParseAsync(inputData).then((p) => {
-      if (p.success) {
-        decryptData.payload = p.data;
-        error = null;
-      } else {
-        decryptData.payload = null;
-        error = p.error;
-      }
-    });
-  }
-
-  function decrypt() {
+  function decrypt(e: SubmitEvent) {
+    e.preventDefault();
     plaintext = null;
     if (error) return;
     const parsed = DecryptData.safeParse(decryptData);
@@ -131,15 +112,23 @@
 </script>
 
 <div class="space-y-8 p-1">
-  <form class="space-y-4" on:submit|preventDefault={decrypt}>
+  <form class="space-y-4" onsubmit={decrypt}>
     <div>
       <Label for="payload">Ciphertext Payload</Label>
       <ValidationError {error} path="payload" />
       <TextOrFileInput
         text={location.hash ? location.href : ""}
-        bind:data={inputData.data}
-        bind:filename={inputData.filename}
         placeholder="ciphertext payload"
+        onInput={async (data, filename) => {
+          const result = await InputData.safeParseAsync({ data, filename });
+          if (result.success) {
+            decryptData.payload = result.data;
+            error = null;
+          } else {
+            decryptData.payload = null;
+            error = result.error;
+          }
+        }}
       />
     </div>
 
@@ -151,6 +140,7 @@
           variant="plain"
           id="password"
           type="password"
+          autocomplete="off"
           placeholder="The password to use for decryption"
           class="w-full"
           bind:value={decryptData.password}
@@ -176,7 +166,7 @@
     <TextOrFileOutput
       kind="Decrypt"
       data={plaintext}
-      name={decryptData.payload?.fn}
+      name={decryptData.payload?.fn ?? undefined}
     />
   {/if}
 </div>

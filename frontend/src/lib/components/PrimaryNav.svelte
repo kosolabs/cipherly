@@ -1,13 +1,17 @@
 <script lang="ts">
-  import { page } from "$app/stores";
+  import { page } from "$app/state";
   import { cn } from "$lib/utils";
   import type { Icon } from "@lucide/svelte";
 
-  export let items: {
-    href: string;
-    title: string;
-    icon: typeof Icon;
-  }[];
+  type Props = {
+    items: {
+      href: string;
+      title: string;
+      icon: typeof Icon;
+    }[];
+  };
+
+  let { items }: Props = $props();
 </script>
 
 <div class="border-m3-secondary/20 border-b-4">
@@ -20,15 +24,14 @@
         <a
           class={cn(
             "-mb-[3px] flex items-center border-b-4 border-transparent px-1 py-2 text-base font-semibold whitespace-nowrap md:text-lg",
-            $page.url.pathname !== "/" &&
-              item.href.startsWith($page.url.pathname)
+            page.url.pathname !== "/" && item.href.startsWith(page.url.pathname)
               ? "border-m3-primary text-m3-primary border-b-4"
               : "text-m3-secondary/80 hover:border-m3-secondary hover:text-m3-secondary",
           )}
           href={item.href}
         >
           {#if item.icon}
-            <svelte:component this={item.icon} class="mr-2 h-4 w-4" />
+            <item.icon class="mr-2 h-4 w-4" />
           {/if}
           <span>{item.title}</span>
         </a>

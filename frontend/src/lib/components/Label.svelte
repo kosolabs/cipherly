@@ -2,10 +2,10 @@
   import type { Snippet } from "svelte";
   import type { HTMLLabelAttributes } from "svelte/elements";
 
-  export type LabelProps = {
+  type Props = {
     children: Snippet;
   } & HTMLLabelAttributes;
-  let { children, ...restProps }: LabelProps = $props();
+  let { children, ...restProps }: Props = $props();
 </script>
 
 <label
