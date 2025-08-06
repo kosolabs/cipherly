@@ -92,7 +92,7 @@ export enum EncryptionScheme {
 }
 
 const PayloadHeader = z.object({
-  es: z.nativeEnum(EncryptionScheme),
+  es: z.enum(EncryptionScheme),
   fn: z.string().nullable().optional(),
 });
 type PayloadHeader = z.infer<typeof PayloadHeader>;

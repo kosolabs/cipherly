@@ -10,7 +10,7 @@ declare global {
   }
 
   interface Window {
-    setLoginToken(token: string);
+    setLoginToken: (token: string) => void;
   }
 }
 
