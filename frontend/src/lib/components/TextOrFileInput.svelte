@@ -42,13 +42,13 @@
 <input bind:this={fileInputEl} type="file" multiple={false} bind:files hidden />
 {#if file}
   <div
-    class="bg-accent flex items-center justify-between rounded-md border px-3 py-4"
+    class="bg-m3-surface-container flex items-center justify-between rounded-md border px-3 py-4"
   >
     <div class="flex items-center space-x-3">
-      <FileText class="w-5 text-slate-400" />
+      <FileText class="text-m3-secondary/50 w-5" />
       <div class="space-y-[-3px]">
         <div class="text-md">{file.name}</div>
-        <div class="text-muted-foreground text-xs">
+        <div class="text-m3-secondary/50 text-xs">
           {filesize(file.size)}
         </div>
       </div>
@@ -57,8 +57,8 @@
       variant="plain"
       icon={CircleX}
       onclick={() => {
-        if (fileInputEl) {
-          fileInputEl.value = "";
+        if (files) {
+          files = undefined;
         }
         onInput(new Uint8Array());
       }}

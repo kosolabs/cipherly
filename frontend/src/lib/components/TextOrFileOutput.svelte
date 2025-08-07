@@ -35,12 +35,7 @@
   {:then data}
     {#if !name}
       {@const text = data.map(decodeUtf8).join("")}
-      <Label
-        for="payload"
-        class="text-background-foreground text-sm tracking-wider uppercase"
-      >
-        Ciphertext Payload
-      </Label>
+      <Label for="payload">Ciphertext Payload</Label>
       <Textarea
         id="payload"
         class="w-full"

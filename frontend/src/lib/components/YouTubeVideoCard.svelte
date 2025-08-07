@@ -22,7 +22,7 @@
   referrerpolicy="no-referrer"
 >
   <div
-    class="border-border overflow-hidden rounded border shadow-sm hover:shadow"
+    class="border-m3-secondary/20 shadow-m3-shadow/20 hover:shadow-m3-shadow/40 overflow-hidden rounded-md border shadow-sm"
   >
     <img class="object-cover" src={thumbnail} alt="" srcset="" />
     <div class="flex items-center space-x-4 px-4">

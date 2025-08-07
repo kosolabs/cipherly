@@ -9,7 +9,7 @@
 </script>
 
 <label
-  class="text-background-foreground text-sm tracking-wider uppercase"
+  class="text-m3-secondary text-sm tracking-wider uppercase"
   {...restProps}
 >
   {@render children()}
