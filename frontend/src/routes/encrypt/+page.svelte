@@ -115,11 +115,7 @@
           <IconText icon={KeyRound}>Password</IconText>
         </ToggleButton>
       </ToggleGroup>
-      <Box
-        variant="elevated"
-        shape="rounded"
-        class="mt-2 border px-4 pt-1 pb-2"
-      >
+      <Box variant="elevated" shape="rounded" class="mt-2 border px-4 py-2">
         {#if encrypt.mode === "policy"}
           <Label for="emails">Authorized Emails</Label>
           <ValidationError {error} path="emails" />
