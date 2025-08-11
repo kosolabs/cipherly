@@ -21,29 +21,29 @@
     "node": ">= 20"
   },
   "devDependencies": {
-    "@eslint/js": "9.32.0",
-    "@lucide/svelte": "0.536.0",
+    "@eslint/js": "9.33.0",
+    "@lucide/svelte": "0.539.0",
     "@msgpack/msgpack": "3.1.2",
     "@playwright/test": "1.54.2",
-    "@sveltejs/adapter-static": "3.0.8",
-    "@sveltejs/kit": "2.27.0",
-    "@sveltejs/vite-plugin-svelte": "6.1.0",
+    "@sveltejs/adapter-static": "3.0.9",
+    "@sveltejs/kit": "2.27.3",
+    "@sveltejs/vite-plugin-svelte": "6.1.1",
     "@tailwindcss/forms": "0.5.10",
     "@tailwindcss/postcss": "4.1.11",
     "@types/eslint": "9.6.1",
-    "@types/node": "24.2.0",
+    "@types/node": "24.2.1",
     "autoprefixer": "10.4.21",
     "clsx": "2.1.1",
-    "eslint": "9.32.0",
+    "eslint": "9.33.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-svelte": "3.11.0",
     "filesize": "11.0.2",
     "globals": "16.3.0",
     "google-oauth-gsi": "4.0.1",
-    "js-base64": "3.7.7",
+    "js-base64": "3.7.8",
     "jsdom": "26.1.0",
     "jwt-decode": "4.0.0",
-    "kosui": "0.0.19",
+    "kosui": "0.0.20",
     "mode-watcher": "1.1.0",
     "postcss": "8.5.6",
     "postcss-load-config": "6.0.1",
@@ -52,7 +52,7 @@
     "prettier-plugin-organize-imports": "4.2.0",
     "prettier-plugin-svelte": "3.4.0",
     "prettier-plugin-tailwindcss": "0.6.14",
-    "svelte": "5.37.3",
+    "svelte": "5.38.0",
     "svelte-check": "4.3.1",
     "tailwind-merge": "3.3.1",
     "tailwind-variants": "2.1.0",
@@ -60,9 +60,9 @@
     "tslib": "2.8.1",
     "typescript": "5.9.2",
     "typescript-eslint": "8.39.0",
-    "vite": "7.0.6",
+    "vite": "7.1.1",
     "vitest": "3.2.4",
-    "zod": "4.0.14"
+    "zod": "4.0.17"
   },
   "pnpm": {
     "overrides": {
@@ -72,9 +72,6 @@
       "@sveltejs/kit",
       "@tailwindcss/oxide",
       "esbuild"
-    ],
-    "ignoredBuiltDependencies": [
-      "kosui"
     ]
   }
 }
