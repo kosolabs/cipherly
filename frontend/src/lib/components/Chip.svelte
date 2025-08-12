@@ -41,7 +41,6 @@
   class="w-full"
   {placeholder}
   bind:value={input}
-  variant="plain"
   onblur={addAndClear}
   onkeydown={(e) => {
     if (e.key === "Enter") {

@@ -68,7 +68,6 @@
   <div class="space-y-2">
     <Textarea
       class="w-full"
-      variant="plain"
       placeholder={`Enter the ${placeholder} or drag and drop a ${placeholder} file here`}
       bind:value={text}
       ondrop={(event) => {

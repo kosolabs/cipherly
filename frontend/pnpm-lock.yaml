@@ -78,8 +78,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       kosui:
-        specifier: 0.0.20
-        version: 0.0.20(svelte@5.38.0)
+        specifier: 0.0.21
+        version: 0.0.21(svelte@5.38.0)
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.38.0)
@@ -1265,8 +1265,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  kosui@0.0.20:
-    resolution: {integrity: sha512-cLJf7VIJ5mfC9+ehoTLhlOlpe4QRHaAiWTaPKuQPHWc7Ds0QbQx9hnYfvhBN5IIWJ4Ct5vshQJeo6/QjL8XSbg==}
+  kosui@0.0.21:
+    resolution: {integrity: sha512-nAIYk3Qa89NEP+/V1rJoarCtkre/ZnXsOt2GkHxVXNU5V/KTkJtGdtSWXe7r8Kj1WgBnf2IhXT7fjyQ85mC/5Q==}
     engines: {node: '>= 20'}
     peerDependencies:
       svelte: ^5.0.0
@@ -3150,7 +3150,7 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  kosui@0.0.20(svelte@5.38.0):
+  kosui@0.0.21(svelte@5.38.0):
     dependencies:
       '@floating-ui/dom': 1.7.3
       '@lucide/svelte': 0.539.0(svelte@5.38.0)

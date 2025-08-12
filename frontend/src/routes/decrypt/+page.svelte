@@ -136,7 +136,6 @@
         <Label for="password">Password</Label>
         <ValidationError {error} path="password" />
         <Input
-          variant="plain"
           id="password"
           type="password"
           autocomplete="off"
