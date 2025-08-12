@@ -133,7 +133,6 @@
             type="password"
             autocomplete="off"
             class="w-full"
-            variant="plain"
             placeholder="The password to use for encryption"
             bind:value={encrypt.password}
             onchange={clear}

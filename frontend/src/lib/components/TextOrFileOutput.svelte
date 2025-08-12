@@ -39,7 +39,6 @@
       <Textarea
         id="payload"
         class="w-full"
-        variant="plain"
         value={text}
         placeholder="The plain text secret to encrypt"
       />
