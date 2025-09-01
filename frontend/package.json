@@ -14,7 +14,8 @@
     "lint": "prettier --check . && eslint .",
     "test:unit": "vitest",
     "test:e2e": "playwright test",
-    "test": "pnpm test:unit -- --run && pnpm test:e2e"
+    "test": "pnpm test:unit -- --run && pnpm test:e2e",
+    "test:ci": "pnpm run \"/^(build|check|lint|test:unit)$/\""
   },
   "packageManager": "pnpm@10.15.1",
   "engines": {
