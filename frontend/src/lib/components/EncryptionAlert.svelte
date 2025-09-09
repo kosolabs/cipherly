@@ -9,7 +9,7 @@
   let { title, error }: Props = $props();
 </script>
 
-<Alert variant="outlined" color="error">
+<Alert variant="tonal" color="error">
   <div>{title}</div>
   <div class="text-sm">
     {#if error?.status === 401}
