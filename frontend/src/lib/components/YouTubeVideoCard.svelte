@@ -7,7 +7,6 @@
   };
   let { id, title }: Props = $props();
 
-  const videoUrl = `https://youtu.be/${id}`;
   const thumbnail = `https://i3.ytimg.com/vi/${id}/maxresdefault.jpg`;
 
   // Clip length to 9 words
@@ -18,7 +17,7 @@
 <a
   class="mr-6 mb-6 w-full sm:w-auto sm:max-w-[16rem]"
   target="_blank"
-  href={videoUrl}
+  href={`https://youtu.be/${id}`}
   referrerpolicy="no-referrer"
 >
   <div

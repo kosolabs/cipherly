@@ -21,12 +21,12 @@
       items={[
         {
           title: "Encrypt",
-          href: "/encrypt/",
+          href: "/encrypt",
           icon: Lock,
         },
         {
           title: "Decrypt",
-          href: "/decrypt/",
+          href: "/decrypt",
           icon: Unlock,
         },
       ]}

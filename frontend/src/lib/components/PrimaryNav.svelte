@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { resolve } from "$app/paths";
   import { page } from "$app/state";
   import { cn } from "$lib/utils";
   import type { Icon } from "@lucide/svelte";
 
   type Props = {
     items: {
-      href: string;
+      href: "/encrypt" | "/decrypt";
       title: string;
       icon: typeof Icon;
     }[];
@@ -28,7 +29,7 @@
               ? "border-m3-primary text-m3-primary border-b-4"
               : "text-m3-secondary/80 hover:border-m3-secondary hover:text-m3-secondary",
           )}
-          href={item.href}
+          href={resolve(item.href)}
         >
           {#if item.icon}
             <item.icon class="mr-2 h-4 w-4" />
