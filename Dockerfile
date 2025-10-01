@@ -1,4 +1,4 @@
-FROM rust:1.90.0@sha256:eabb786e74b520e7ea45baca03ea20c3e8c6dc037c392d457badf05d8e5818b5 AS backend
+FROM rust:1.90.0@sha256:f98e87a9cc69f782ddbf3e7020b7438c8d7fa113bb54556757042134c7d1dfe7 AS backend
 
 # Setup dependencies and run a dummy build ahead
 # of copying in our code. This speeds up re-builds
@@ -13,7 +13,7 @@ RUN cargo build --release --lib
 COPY backend/src ./src
 RUN cargo build --release
 
-FROM node:24.9.0@sha256:a2ed436bacdcc9dd543202a327bbce2519c43e3755a41a186f8f51c037ef3342 AS frontend
+FROM node:24.9.0@sha256:89ec1788bd39c23adafd9f7ee14a023fcd01d08c5920745d71fb571bc7d30d1e AS frontend
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
