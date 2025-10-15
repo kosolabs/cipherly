@@ -3,7 +3,7 @@
 @import "tailwindcss";
 /* @plugin "@tailwindcss/forms"; */
 
-@config '../tailwind.config.ts';
+@config "../tailwind.config.ts";
 
 @layer base {
   :root {

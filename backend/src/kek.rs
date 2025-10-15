@@ -14,6 +14,7 @@ pub fn parse(json: &str) -> Result<Keks> {
                 .as_str()
                 .context("KEK should be a Base64 encoded string")?;
             let bytes_kek = BASE64_URL_SAFE_NO_PAD.decode(base64_kek)?;
+            #[allow(deprecated)] // https://github.com/RustCrypto/AEADs/issues/730
             let kek = Aes256Gcm::new(Key::<Aes256Gcm>::from_slice(&bytes_kek));
             Ok((key, kek))
         })
