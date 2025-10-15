@@ -50,7 +50,7 @@ impl KeySet {
                     "Tried to fetch key for test creds ({kid}) but test creds aren't enabled."
                 ));
             }
-            return Ok(DecodingKey::from_rsa_components("MA", "MA")?);
+            return Ok(DecodingKey::from_secret("MA".as_bytes()));
         }
 
         for key in &self.keys {
