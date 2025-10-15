@@ -56,6 +56,7 @@ async fn seal(
         .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
     Ok(Json(SealedEnvelope {
         kid: "v1".into(),
+        #[allow(deprecated)] // https://github.com/RustCrypto/AEADs/issues/730
         nonce: BASE64_URL_SAFE_NO_PAD.encode(nonce.as_slice()),
         data: BASE64_URL_SAFE_NO_PAD.encode(ciphertext.as_slice()),
     }))
