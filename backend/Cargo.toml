@@ -21,7 +21,7 @@ anyhow = "1.0.100"
 axum = { version = "0.8.5", features = ["http2", "macros"] }
 base64 = "0.22.1"
 chrono = "0.4.42"
-jsonwebtoken = "10.0.0"
+jsonwebtoken = { version = "10.0.0", features = ["rust_crypto"] }
 reqwest = { version = "0.12.23" }
 rmp-serde = "1.3.0"
 serde = "1.0.228"
