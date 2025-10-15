@@ -78,8 +78,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       kosui:
-        specifier: 0.0.33
-        version: 0.0.33(svelte@5.40.0)
+        specifier: 0.0.34
+        version: 0.0.34(svelte@5.40.0)
       mode-watcher:
         specifier: 1.1.0
         version: 1.1.0(svelte@5.40.0)
@@ -425,11 +425,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
-
-  '@lucide/svelte@0.544.0':
-    resolution: {integrity: sha512-9f9O6uxng2pLB01sxNySHduJN3HTl5p0HDu4H26VR51vhZfiMzyOMe9Mhof3XAk4l813eTtl+/DYRvGyoRR+yw==}
-    peerDependencies:
-      svelte: ^5
 
   '@lucide/svelte@0.545.0':
     resolution: {integrity: sha512-RlAtWefx9MdpXaOMbx3Qv3/NqpeZKOIPxN2D0RBN2+op0opKly8VgYEEWZTT6Ow/zf7UwyTg6/0ExJlsVLK+8g==}
@@ -1303,8 +1298,8 @@ packages:
   known-css-properties@0.37.0:
     resolution: {integrity: sha512-JCDrsP4Z1Sb9JwG0aJ8Eo2r7k4Ou5MwmThS/6lcIe1ICyb7UBJKGRIUUdqc2ASdE/42lgz6zFUnzAIhtXnBVrQ==}
 
-  kosui@0.0.33:
-    resolution: {integrity: sha512-ubccaQH2I9ta6fdd5Uq6PZV1DJAt++UHsa1ZHu/hX9nNtAU1VI4j775t11WJp6VPpAkdKWQV6nweksagPnNyrw==}
+  kosui@0.0.34:
+    resolution: {integrity: sha512-ZDkRMBMqYpqkL5fM34E1JzSDZUf9rOStLVbieTUMJJ83+L8CN7yI+3w+MWLQgsZrDLlQSYN392WGP6nOW+qlWw==}
     engines: {node: '>= 20'}
     peerDependencies:
       svelte: ^5.0.0
@@ -2345,10 +2340,6 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@lucide/svelte@0.544.0(svelte@5.40.0)':
-    dependencies:
-      svelte: 5.40.0
-
   '@lucide/svelte@0.545.0(svelte@5.40.0)':
     dependencies:
       svelte: 5.40.0
@@ -3221,10 +3212,10 @@ snapshots:
 
   known-css-properties@0.37.0: {}
 
-  kosui@0.0.33(svelte@5.40.0):
+  kosui@0.0.34(svelte@5.40.0):
     dependencies:
       '@floating-ui/dom': 1.7.4
-      '@lucide/svelte': 0.544.0(svelte@5.40.0)
+      '@lucide/svelte': 0.545.0(svelte@5.40.0)
       marked: 16.4.0
       svelte: 5.40.0
 

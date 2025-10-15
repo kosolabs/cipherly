@@ -44,7 +44,7 @@
     "js-base64": "3.7.8",
     "jsdom": "27.0.0",
     "jwt-decode": "4.0.0",
-    "kosui": "0.0.33",
+    "kosui": "0.0.34",
     "mode-watcher": "1.1.0",
     "postcss": "8.5.6",
     "postcss-load-config": "6.0.1",
