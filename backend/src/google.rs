@@ -120,13 +120,7 @@ pub(crate) async fn authenticate(
     let claims = if kid == INTEG_TEST_KID {
         // Example Jwt:
         //   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Imtvc28taW50ZWdyYXRpb24tdGVzdCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5rb3NvLmFwcCIsIm5hbWUiOiJQb2ludHktSGFpcmVkIEJvc3MiLCJwaWN0dXJlIjoiaHR0cHM6Ly9zdGF0aWMud2lraWEubm9jb29raWUubmV0L2RpbGJlcnQvaW1hZ2VzLzYvNjAvQm9zcy5QTkciLCJleHAiOjIwMjQ3ODgwMTR9.3btheBY5h0nQRpWNODfYWQ_mMc26551178jrSDmpv_c
-        let mut validation = Validation::new(jsonwebtoken::Algorithm::HS256);
-        validation.insecure_disable_signature_validation();
-        validation.set_audience(&["cipherly-tests"]);
-        validation.required_spec_claims.insert("aud".to_string());
-        validation.set_issuer(&["cipherly-tests"]);
-        validation.required_spec_claims.insert("iss".to_string());
-        let claims = match jsonwebtoken::decode::<Claims>(bearer, &key, &validation) {
+        let claims = match jsonwebtoken::dangerous::insecure_decode::<Claims>(bearer) {
             Ok(token) => token.claims,
             Err(err) => {
                 tracing::debug!("Decoding bearer test token failed: {err}");
