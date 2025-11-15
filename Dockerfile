@@ -5,6 +5,12 @@ FROM rust:1.91.1@sha256:cd34b27bc6df5450e4952075dc6bd3881a1aeb8f5d0478cd75c2160c
 # triggered by changes to src/ by keeping dependencies
 # in a separate layer.
 WORKDIR /app
+
+# The debian 13 image doesn't seem to include libzstd1. Install it.
+# See https://github.com/GoogleContainerTools/distroless/issues/1887
+# Error: ./sqlx: error while loading shared libraries: libzstd.so.1: cannot open shared object file: No such file or directory
+RUN apt-get update && apt-get install -y --no-install-recommends libzstd1
+
 COPY backend/Cargo.toml backend/Cargo.lock backend/rust-toolchain.toml ./
 COPY backend/build/dummy.rs build/dummy.rs
 RUN cargo build --release --lib
@@ -30,10 +36,11 @@ COPY frontend/src ./src
 COPY frontend/static ./static
 RUN pnpm build
 
-FROM gcr.io/distroless/cc-debian12@sha256:0000f9dc0290f8eaf0ecceafbc35e803649087ea7879570fbc78372df7ac649b AS runtime
+FROM gcr.io/distroless/cc-debian13@sha256:68db2bf2b975ff277c9b2b569c327e47e2824e2c143f4dfe7c4027b15ff2f931 AS runtime
 
 WORKDIR /app
 
+COPY --from=backend /lib/*/libzstd.so.1 /lib/
 COPY --from=backend /app/target/release/cipherly ./
 COPY --from=frontend /app/build ./static
 
