@@ -19,7 +19,7 @@ RUN cargo build --release --lib
 COPY backend/src ./src
 RUN cargo build --release
 
-FROM node:24.11.1@sha256:0c4b1219e836193f8ff099c43a36cb6ebf1bfe4a9a391e9f9eca5b4c96fae5b3 AS frontend
+FROM node:24.11.1@sha256:7f80506b8225bcce2ce8202b1026fcde8f0bfb716b1b833f20250d79d4463276 AS frontend
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -36,7 +36,7 @@ COPY frontend/src ./src
 COPY frontend/static ./static
 RUN pnpm build
 
-FROM gcr.io/distroless/cc-debian13@sha256:68db2bf2b975ff277c9b2b569c327e47e2824e2c143f4dfe7c4027b15ff2f931 AS runtime
+FROM gcr.io/distroless/cc-debian13@sha256:0e90484916aa263753c9885ee4a9b4d6fa756b8242600e2e37fe74c7ec5574f4 AS runtime
 
 WORKDIR /app
 
