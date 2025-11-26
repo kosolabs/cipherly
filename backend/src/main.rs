@@ -160,12 +160,18 @@ async fn run_server(config: Config) -> Result<(SocketAddr, JoinHandle<Result<()>
                 .layer(TraceLayer::new_for_http())
                 // Graceful shutdown will wait for outstanding requests to complete. Add a timeout so
                 // requests don't hang forever.
-                .layer(TimeoutLayer::new(Duration::from_secs(10))),
+                .layer(TimeoutLayer::with_status_code(
+                    StatusCode::REQUEST_TIMEOUT,
+                    Duration::from_secs(10),
+                )),
         )
         .fallback_service(
             ServiceBuilder::new()
                 .layer((
-                    TimeoutLayer::new(Duration::from_secs(20)),
+                    TimeoutLayer::with_status_code(
+                        StatusCode::REQUEST_TIMEOUT,
+                        Duration::from_secs(20),
+                    ),
                     middleware::from_fn(set_static_cache_control),
                 ))
                 .service(
