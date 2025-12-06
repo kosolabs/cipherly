@@ -36,7 +36,7 @@ COPY frontend/src ./src
 COPY frontend/static ./static
 RUN pnpm build
 
-FROM gcr.io/distroless/cc-debian13@sha256:ec656980337e79f6fe88a6cf7eeb8a4ad8f99df77ec5154962ca1f7f3a7984b2 AS runtime
+FROM gcr.io/distroless/cc-debian13@sha256:43fc7a7004c4cdb27aac60b3e95c87130cf47823f72d25d42ed0f9b503f1d184 AS runtime
 
 WORKDIR /app
 
