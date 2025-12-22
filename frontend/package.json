@@ -17,19 +17,19 @@
     "test": "pnpm test:unit -- --run && pnpm test:e2e",
     "test:ci": "pnpm run \"/^(build|check|lint|test:unit)$/\""
   },
-  "packageManager": "pnpm@10.26.0",
+  "packageManager": "pnpm@10.26.1",
   "engines": {
     "node": ">= 20"
   },
   "devDependencies": {
     "@eslint/js": "9.39.2",
-    "@lucide/svelte": "0.561.0",
+    "@lucide/svelte": "0.562.0",
     "@msgpack/msgpack": "3.1.2",
     "@playwright/test": "1.57.0",
     "@sveltejs/adapter-static": "3.0.10",
     "@sveltejs/kit": "2.49.2",
     "@sveltejs/vite-plugin-svelte": "6.2.1",
-    "@tailwindcss/forms": "0.5.10",
+    "@tailwindcss/forms": "0.5.11",
     "@tailwindcss/postcss": "4.1.18",
     "@types/eslint": "9.6.1",
     "@types/node": "24.10.4",
@@ -54,16 +54,16 @@
     "prettier-plugin-svelte": "3.4.1",
     "prettier-plugin-tailwindcss": "0.7.2",
     "svelte": "5.46.0",
-    "svelte-check": "4.3.4",
+    "svelte-check": "4.3.5",
     "tailwind-merge": "3.4.0",
     "tailwind-variants": "3.2.2",
     "tailwindcss": "4.1.18",
     "tslib": "2.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.49.0",
+    "typescript-eslint": "8.50.1",
     "vite": "7.3.0",
-    "vitest": "4.0.15",
-    "zod": "4.2.0"
+    "vitest": "4.0.16",
+    "zod": "4.2.1"
   },
   "pnpm": {
     "overrides": {
