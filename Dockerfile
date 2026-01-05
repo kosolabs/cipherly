@@ -21,13 +21,15 @@ RUN cargo build --release
 
 FROM node:25.2.1@sha256:6d362f0df70431417ef79c30e47c0515ea9066d8be8011e859c6c3575514a027 AS frontend
 
+COPY frontend/.npmrc ./
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
+RUN npm install -g --force corepack
 RUN corepack enable
 WORKDIR /app
 
 # Setup dependencies
-COPY frontend/package.json frontend/pnpm-lock.yaml frontend/.npmrc ./
+COPY frontend/package.json frontend/pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 # Build the frontend.
