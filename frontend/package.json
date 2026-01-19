@@ -17,7 +17,7 @@
     "test": "pnpm test:unit -- --run && pnpm test:e2e",
     "test:ci": "pnpm run \"/^(build|check|lint|test:unit)$/\""
   },
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.28.1",
   "engines": {
     "node": ">= 20"
   },
@@ -32,7 +32,7 @@
     "@tailwindcss/forms": "0.5.11",
     "@tailwindcss/postcss": "4.1.18",
     "@types/eslint": "9.6.1",
-    "@types/node": "25.0.6",
+    "@types/node": "25.0.9",
     "autoprefixer": "10.4.23",
     "clsx": "2.1.1",
     "eslint": "9.39.2",
@@ -44,11 +44,11 @@
     "js-base64": "3.7.8",
     "jsdom": "27.4.0",
     "jwt-decode": "4.0.0",
-    "kosui": "0.1.0",
+    "kosui": "0.1.1",
     "mode-watcher": "1.1.0",
     "postcss": "8.5.6",
     "postcss-load-config": "6.0.1",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-jsdoc": "1.8.0",
     "prettier-plugin-organize-imports": "4.3.0",
     "prettier-plugin-svelte": "3.4.1",
@@ -60,7 +60,7 @@
     "tailwindcss": "4.1.18",
     "tslib": "2.8.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.53.0",
+    "typescript-eslint": "8.53.1",
     "vite": "7.3.1",
     "vitest": "4.0.17",
     "zod": "4.3.5"
