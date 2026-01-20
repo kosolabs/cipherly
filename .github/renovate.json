@@ -33,11 +33,13 @@
       "datasourceTemplate": "crate"
     }
   ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["* 1-10 1 * *"],
-    "automerge": true,
-    "platformAutomerge": false,
-    "automergeSchedule": ["* 10-16 * * 1-5"]
-  }
+  "automerge": true,
+  "automergeType": "branch",
+  "platformAutomerge": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    }
+  ]
 }
