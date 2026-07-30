@@ -46,7 +46,7 @@
     "jwt-decode": "4.0.0",
     "kosui": "0.1.1",
     "mode-watcher": "1.1.0",
-    "postcss": "8.5.18",
+    "postcss": "8.5.25",
     "postcss-load-config": "6.0.1",
     "prettier": "3.8.0",
     "prettier-plugin-jsdoc": "1.8.0",
